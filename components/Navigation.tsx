@@ -30,19 +30,20 @@ const Navigation = () => {
   return (
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-black/20 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center">
             <Image 
               src="/logo.png" 
               alt="Wedgewood Adventures Kenya" 
               width={50}
               height={50}
-              className="h-12 w-auto"
+              className="h-10 w-10 sm:h-12 sm:w-auto object-contain"
+              priority
             />
           </div>
 
@@ -77,7 +78,8 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-foreground hover:bg-accent/10 transition-colors"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/10 transition-colors min-h-[44px] min-w-[44px]"
+            aria-label="Toggle menu"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -85,7 +87,7 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border">
+          <div className="md:hidden bg-background/98 backdrop-blur-md border-t border-border shadow-lg">
             <div className="px-4 pt-4 pb-6 space-y-2">
               {navItems.map((item) => (
                 <a

@@ -6,7 +6,7 @@ import { scrollToSection } from '@/lib/utils';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 pb-8 sm:pb-0">
       {/* Background image */}
       <Image 
         src="/safari-hero.jpg" 
@@ -19,38 +19,40 @@ const Hero = () => {
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50 z-5" />
       
-      {/* Decorative elements with color priming */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl z-1" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl z-1" />
+      {/* Decorative elements with color priming - Reduced on mobile */}
+      <div className="absolute top-20 right-0 w-48 h-48 sm:w-96 sm:h-96 bg-accent/10 rounded-full blur-3xl z-1" />
+      <div className="absolute bottom-0 left-0 w-36 h-36 sm:w-72 sm:h-72 bg-primary/10 rounded-full blur-3xl z-1" />
 
-      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-4 sm:mb-6 leading-tight text-balance drop-shadow-lg px-2">
-          Venture Beyond the Horizon
-        </h1>
-        
-        <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md px-2">
-          Immerse yourself in Africa's untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
-          <button 
-            onClick={() => scrollToSection('#bespoke')}
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-accent text-black text-base sm:text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl active:scale-95 drop-shadow-lg min-h-[48px]"
-          >
-            Start Your Adventure
-            <ChevronRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
-          </button>
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+        <div className="space-y-6 sm:space-y-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white leading-tight text-balance drop-shadow-lg">
+            Venture Beyond the Horizon
+          </h1>
           
-          <button 
-            onClick={() => scrollToSection('#experiences')}
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-md active:scale-95 min-h-[48px]"
-          >
-            Explore Experiences
-          </button>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md px-2">
+            Immerse yourself in Africa's untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
+            <button 
+              onClick={() => scrollToSection('#bespoke')}
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-accent text-black text-base sm:text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl active:scale-95 drop-shadow-lg min-h-[48px] w-full sm:w-auto"
+            >
+              Start Your Adventure
+              <ChevronRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
+            </button>
+            
+            <button 
+              onClick={() => scrollToSection('#experiences')}
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-md active:scale-95 min-h-[48px] w-full sm:w-auto"
+            >
+              Explore Experiences
+            </button>
+          </div>
         </div>
 
-        {/* Value Propositions */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 md:mt-20 px-2">
+        {/* Value Propositions - Hidden on very small screens, shown on larger */}
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 md:mt-20">
           {[
             { icon: Eye, title: 'Expert Guides', desc: 'Naturalists with decades of safari expertise' },
             { icon: MapPin, title: 'Exclusive Access', desc: 'Private reserves and intimate wildlife moments' },
@@ -116,10 +118,10 @@ const Hero = () => {
         `}</style>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-        <div className="w-8 h-12 border-2 border-foreground/30 rounded-full flex items-start justify-center p-2">
-          <div className="w-1.5 h-2 bg-foreground/50 rounded-full" />
+      {/* Scroll indicator - Hidden on mobile to save space */}
+      <div className="hidden sm:block absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+        <div className="w-8 h-12 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+          <div className="w-1.5 h-2 bg-white/50 rounded-full" />
         </div>
       </div>
     </section>
