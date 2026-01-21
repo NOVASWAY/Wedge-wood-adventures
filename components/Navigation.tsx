@@ -33,17 +33,24 @@ const Navigation = () => {
         isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-black/20 backdrop-blur-sm'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-14 sm:h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center z-10">
-            <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }}>
+            <a 
+              href="#home" 
+              onClick={(e) => { 
+                e.preventDefault(); 
+                scrollToSection('#home'); 
+              }}
+              className="flex items-center"
+            >
               <Image 
                 src="/logo.png" 
                 alt="Wedgewood Adventures Kenya" 
-                width={50}
-                height={50}
-                className="h-10 w-10 sm:h-12 sm:w-auto object-contain drop-shadow-lg"
+                width={40}
+                height={40}
+                className="h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-auto object-contain drop-shadow-lg"
                 priority
               />
             </a>

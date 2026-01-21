@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: 'Wedgewood Adventures Kenya - Luxury Safari Experiences',
   description: 'Experience ultra-premium, bespoke African safari experiences. Venture beyond the horizon with Wedgewood Adventures Kenya.',
   generator: 'v0.app',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
   icons: {
     icon: [
       {

@@ -6,7 +6,7 @@ import { scrollToSection } from '@/lib/utils';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20">
+    <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-14 sm:pt-16 md:pt-20">
       {/* Background image */}
       <Image 
         src="/safari-hero.jpg" 
@@ -23,17 +23,18 @@ const Hero = () => {
       <div className="absolute top-20 right-0 w-48 h-48 sm:w-96 sm:h-96 bg-accent/10 rounded-full blur-3xl z-1" />
       <div className="absolute bottom-0 left-0 w-36 h-36 sm:w-72 sm:h-72 bg-primary/10 rounded-full blur-3xl z-1" />
 
-      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full flex flex-col justify-center min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)]">
-        <div className="space-y-4 sm:space-y-6 md:space-y-8">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.1] text-balance drop-shadow-2xl px-1">
-            Venture Beyond the Horizon
-          </h1>
-          
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-lg px-3">
-            Immerse yourself in Africa's untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
-          </p>
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full py-12 sm:py-16 md:py-0">
+        <div className="flex flex-col justify-center min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] md:min-h-[calc(100vh-5rem)]">
+          <div className="space-y-6 sm:space-y-7 md:space-y-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white leading-[1.2] text-balance drop-shadow-2xl">
+              Venture Beyond the Horizon
+            </h1>
+            
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-lg">
+              Immerse yourself in Africa's untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center pt-2 sm:pt-0">
             <button 
               onClick={() => scrollToSection('#bespoke')}
               className="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-accent text-black text-base sm:text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl active:scale-95 drop-shadow-lg min-h-[52px] w-full sm:w-auto"
