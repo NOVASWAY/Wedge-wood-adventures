@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
+import { getImagePath } from '@/lib/utils';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,7 +15,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Image 
-                src="/logo.png" 
+                src={getImagePath("/logo.png")} 
                 alt="Wedgewood Adventures Kenya" 
                 width={40}
                 height={40}

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
+import { getImagePath } from '@/lib/utils';
 
 const About = () => {
   return (
@@ -11,7 +12,7 @@ const About = () => {
           {/* Image */}
           <div className="relative h-96 sm:h-[500px] rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="/elephants.jpg"
+              src={getImagePath("/elephants.jpg")}
               alt="African Elephants - Wedgewood Adventures Kenya"
               fill
               className="object-cover object-center"

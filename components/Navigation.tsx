@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Menu, X, ChevronRight } from 'lucide-react';
+import { getImagePath } from '@/lib/utils';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +38,7 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Image 
-              src="/logo.png" 
+              src={getImagePath("/logo.png")} 
               alt="Wedgewood Adventures Kenya" 
               width={40}
               height={40}

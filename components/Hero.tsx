@@ -2,13 +2,14 @@
 
 import { ChevronRight, Eye, Crown, MapPin, Binary as Binoculars, Compass } from 'lucide-react';
 import Image from 'next/image';
+import { getImagePath } from '@/lib/utils';
 
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28">
       {/* Background image */}
       <Image 
-        src="/safari-hero.jpg" 
+        src={getImagePath("/safari-hero.jpg")} 
         alt="African Safari Landscape"
         fill
         className="object-cover absolute inset-0 z-0"

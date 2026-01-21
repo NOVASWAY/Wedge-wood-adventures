@@ -3,17 +3,18 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getImagePath } from '@/lib/utils';
 
 const Gallery = () => {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   const gallery = [
-    { id: 1, image: '/masai-mara.jpg', title: 'Great Migration - Masai Mara', category: 'Landscapes' },
-    { id: 2, image: '/elephants.jpg', title: 'African Elephants', category: 'Wildlife' },
-    { id: 3, image: '/maasai-culture.jpg', title: 'Maasai Warriors', category: 'Culture' },
-    { id: 4, image: '/lion-pride.jpg', title: 'Majestic Lion Pride', category: 'Wildlife' },
-    { id: 5, image: '/kilimanjaro.jpg', title: 'Mount Kilimanjaro at Sunrise', category: 'Landscapes' },
-    { id: 6, image: '/flamingo-lake.jpg', title: 'Pink Flamingos - Lake Nakuru', category: 'Wildlife' },
+    { id: 1, image: getImagePath('/masai-mara.jpg'), title: 'Great Migration - Masai Mara', category: 'Landscapes' },
+    { id: 2, image: getImagePath('/elephants.jpg'), title: 'African Elephants', category: 'Wildlife' },
+    { id: 3, image: getImagePath('/maasai-culture.jpg'), title: 'Maasai Warriors', category: 'Culture' },
+    { id: 4, image: getImagePath('/lion-pride.jpg'), title: 'Majestic Lion Pride', category: 'Wildlife' },
+    { id: 5, image: getImagePath('/kilimanjaro.jpg'), title: 'Mount Kilimanjaro at Sunrise', category: 'Landscapes' },
+    { id: 6, image: getImagePath('/flamingo-lake.jpg'), title: 'Pink Flamingos - Lake Nakuru', category: 'Wildlife' },
   ];
 
   const nextImage = () => {
@@ -51,7 +52,7 @@ const Gallery = () => {
             >
               {/* Image */}
               <Image 
-                src={item.image || "/placeholder.svg"}
+                src={item.image || getImagePath("/placeholder.svg")}
                 alt={item.title}
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-300"
@@ -86,7 +87,7 @@ const Gallery = () => {
             <div className="text-center max-w-2xl">
               <div className="relative w-full aspect-square rounded-xl mb-4 overflow-hidden">
                 <Image 
-                  src={gallery[selectedIdx].image || "/placeholder.svg"}
+                  src={gallery[selectedIdx].image || getImagePath("/placeholder.svg")}
                   alt={gallery[selectedIdx].title}
                   fill
                   className="object-cover"

@@ -2,32 +2,33 @@
 
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { getImagePath } from '@/lib/utils';
 
 const Destinations = () => {
   const destinations = [
     {
-      image: '/masai-mara.jpg',
+      image: getImagePath('/masai-mara.jpg'),
       name: 'Masai Mara',
       tagline: 'Kenya\'s Crown Jewel',
       description: 'Witness the legendary Great Migration. Encounter the Big Five roaming vast golden plains, and experience Africa\'s most spectacular wildlife theater.',
       highlights: ['Big Five Wildlife', 'Great Migration', 'River Crossings', 'Exclusive Camps'],
     },
     {
-      image: '/kilimanjaro.jpg',
+      image: getImagePath('/kilimanjaro.jpg'),
       name: 'Amboseli National Park',
       tagline: 'Gateway to Kilimanjaro',
       description: 'Marvel at Mount Kilimanjaro\'s snow-capped peaks while watching elephant herds roam. Pristine landscapes with intimate cultural encounters.',
       highlights: ['Kilimanjaro Views', 'Elephant Herds', 'Maasai Culture', 'Pristine Landscape'],
     },
     {
-      image: '/tsavo.jpg',
+      image: getImagePath('/tsavo.jpg'),
       name: 'Tsavo National Parks',
       tagline: 'The Land of Giants',
       description: 'Africa\'s largest park system. Remote, untamed wilderness where red elephants roam volcanic landscapes. Exclusive luxury in genuine wilderness.',
       highlights: ['Red Elephants', 'Remote Luxury', 'Untamed Wild', 'Hidden Lodges'],
     },
     {
-      image: '/flamingo-lake.jpg',
+      image: getImagePath('/flamingo-lake.jpg'),
       name: 'Lake Nakuru',
       tagline: 'Flamingo Paradise',
       description: 'Thousands of pink flamingos create a surreal landscape. Rhino sanctuary and rare bird species in a unique soda lake ecosystem.',
@@ -57,7 +58,7 @@ const Destinations = () => {
               {/* Image header */}
               <div className="relative h-56 overflow-hidden">
                 <Image 
-                  src={dest.image || "/placeholder.svg"}
+                  src={dest.image || getImagePath("/placeholder.svg")}
                   alt={dest.name}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-300"

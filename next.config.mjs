@@ -7,8 +7,6 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    loader: 'custom',
-    loaderFile: './lib/imageLoader.js',
   },
   output: 'export',
   basePath: basePath,

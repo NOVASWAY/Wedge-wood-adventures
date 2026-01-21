@@ -2,32 +2,33 @@
 
 import { ChevronRight, Compass, Mountain, Users, TreePine } from 'lucide-react';
 import Image from 'next/image';
+import { getImagePath } from '@/lib/utils';
 
 const Experiences = () => {
   const experiences = [
     {
-      image: '/game-drive.jpg',
+      image: getImagePath('/game-drive.jpg'),
       icon: Compass,
       title: 'Private Guided Safaris',
       description: 'Intimate wildlife encounters with expert naturalists who share deep knowledge of Kenya\'s ecosystems. Track lions, elephants, and leopards across pristine landscapes.',
       cta: 'Customize This Experience',
     },
     {
-      image: '/kilimanjaro.jpg',
+      image: getImagePath('/kilimanjaro.jpg'),
       icon: Mountain,
       title: 'Mountain Adventures',
       description: 'Summit Mount Kenya or trek through highland wilderness. Adventure designed for thrill-seekers with expert mountaineering guides and luxury base camps.',
       cta: 'Customize This Experience',
     },
     {
-      image: '/safari-camp.jpg',
+      image: getImagePath('/safari-camp.jpg'),
       icon: Compass,
       title: 'Luxury Lodge Experiences',
       description: 'Stay in ultra-premium camps with gourmet dining under African stars. Wake to wildlife outside your tent and experience unparalleled comfort in the wild.',
       cta: 'Customize This Experience',
     },
     {
-      image: '/maasai-culture.jpg',
+      image: getImagePath('/maasai-culture.jpg'),
       icon: TreePine,
       title: 'Cultural Immersion',
       description: 'Connect with Maasai warriors, learn traditional crafts, and experience authentic African heritage. Meaningful encounters that bridge cultures with respect and authenticity.',
@@ -59,7 +60,7 @@ const Experiences = () => {
                 {/* Image container */}
                 <div className="relative h-40 sm:h-48 overflow-hidden">
                   <Image 
-                    src={exp.image || "/placeholder.svg"}
+                    src={exp.image || getImagePath("/placeholder.svg")}
                     alt={exp.title}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
