@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/logo.png',
+        url: '/Wedge-wood-adventures/logo.png',
       },
     ],
-    apple: '/logo.png',
+    apple: '/Wedge-wood-adventures/logo.png',
   },
 }
 

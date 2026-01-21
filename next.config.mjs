@@ -6,7 +6,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
- 
+  output: 'export',
+  basePath: '/Wedge-wood-adventures',
+  assetPrefix: '/Wedge-wood-adventures',
+  trailingSlash: true,
 }
 
 export default nextConfig
