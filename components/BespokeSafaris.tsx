@@ -3,12 +3,20 @@
 import React from "react"
 
 import { useState } from 'react';
-import { ChevronRight, Calendar, Users, MapPin } from 'lucide-react';
+import { format } from 'date-fns';
+import { ChevronRight, Calendar as CalendarIcon, Users, MapPin } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const BespokeSafaris = () => {
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [dateInputMode, setDateInputMode] = useState<'calendar' | 'text'>('calendar');
   const [formData, setFormData] = useState({
     dates: '',
     groupSize: '',
+    luxuryLevel: '',
     interests: '',
     name: '',
     email: '',
@@ -22,9 +30,44 @@ const BespokeSafaris = () => {
     });
   };
 
+  const handleDateSelect = (date: Date | undefined) => {
+    setSelectedDate(date);
+    if (date) {
+      const formattedDate = format(date, 'MMMM yyyy');
+      setFormData({
+        ...formData,
+        dates: formattedDate,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        dates: '',
+      });
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    
+    // Create WhatsApp message with form data
+    const message = `Hello! I'm interested in a bespoke safari experience.
+
+Preferred Dates: ${formData.dates || 'Flexible'}
+Group Size: ${formData.groupSize || 'Not specified'}
+Luxury Level: ${formData.luxuryLevel || 'Not specified'}
+Interests: ${formData.interests || 'Not specified'}
+
+Contact Information:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}`;
+
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/254748132915?text=${encodedMessage}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -45,18 +88,77 @@ const BespokeSafaris = () => {
             {/* Quick Details */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="flex items-center text-sm font-semibold text-foreground">
-                  <Calendar className="h-4 w-4 mr-2 text-accent" />
-                  Preferred Dates
-                </label>
-                <input
-                  type="text"
-                  name="dates"
-                  placeholder="e.g., July 2026 or flexible"
-                  value={formData.dates}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
-                />
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center text-sm font-semibold text-foreground">
+                    <CalendarIcon className="h-4 w-4 mr-2 text-accent" />
+                    Preferred Dates
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setDateInputMode(dateInputMode === 'calendar' ? 'text' : 'calendar')}
+                    className="text-xs text-accent hover:text-primary transition-colors"
+                  >
+                    {dateInputMode === 'calendar' ? 'Type instead' : 'Use calendar'}
+                  </button>
+                </div>
+                
+                {dateInputMode === 'calendar' ? (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal px-4 py-3 h-auto",
+                          !selectedDate && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {selectedDate ? (
+                          <span>{format(selectedDate, 'MMMM yyyy')}</span>
+                        ) : formData.dates ? (
+                          <span>{formData.dates}</span>
+                        ) : (
+                          <span className="text-foreground/40">Select month or type</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0 bg-popover" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={handleDateSelect}
+                        defaultMonth={selectedDate || new Date()}
+                        fromYear={2024}
+                        toYear={2030}
+                        className="rounded-md border-0"
+                        modifiersClassNames={{
+                          selected: "bg-primary text-primary-foreground"
+                        }}
+                      />
+                      <div className="p-3 border-t border-border">
+                        <p className="text-xs text-muted-foreground mb-2">Or type manually:</p>
+                        <input
+                          type="text"
+                          name="dates"
+                          placeholder="e.g., July 2026 or flexible"
+                          value={formData.dates}
+                          onChange={handleChange}
+                          className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                ) : (
+                  <input
+                    type="text"
+                    name="dates"
+                    placeholder="e.g., July 2026 or flexible"
+                    value={formData.dates}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
+                  />
+                )}
               </div>
 
               <div className="space-y-2">
@@ -85,7 +187,7 @@ const BespokeSafaris = () => {
                 </label>
                 <select
                   name="luxuryLevel"
-                  value={formData.interests}
+                  value={formData.luxuryLevel || ''}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
                 >

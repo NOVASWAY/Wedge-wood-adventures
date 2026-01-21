@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
+import { scrollToSection } from '@/lib/utils';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -33,10 +34,22 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Explore</h3>
             <ul className="space-y-2 text-sm">
-              {['Experiences', 'Destinations', 'Bespoke Safaris', 'Gallery'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-foreground/70 hover:text-accent transition-colors">
-                    {link}
+              {[
+                { label: 'Experiences', href: '#experiences' },
+                { label: 'Destinations', href: '#destinations' },
+                { label: 'Bespoke Safaris', href: '#bespoke' },
+                { label: 'Gallery', href: '#gallery' }
+              ].map((item) => (
+                <li key={item.label}>
+                  <a 
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.href);
+                    }}
+                    className="text-foreground/70 hover:text-accent transition-colors cursor-pointer"
+                  >
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -47,10 +60,20 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Company</h3>
             <ul className="space-y-2 text-sm">
-              {['About Us', 'Our Team', 'Blog', 'Careers'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-foreground/70 hover:text-accent transition-colors">
-                    {link}
+              {[
+                { label: 'About Us', href: '#about' },
+                { label: 'Contact', href: '#contact' }
+              ].map((item) => (
+                <li key={item.label}>
+                  <a 
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.href);
+                    }}
+                    className="text-foreground/70 hover:text-accent transition-colors cursor-pointer"
+                  >
+                    {item.label}
                   </a>
                 </li>
               ))}

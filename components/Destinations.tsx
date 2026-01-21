@@ -2,6 +2,7 @@
 
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { scrollToSection } from '@/lib/utils';
 
 const Destinations = () => {
   const destinations = [
@@ -86,7 +87,10 @@ const Destinations = () => {
                   ))}
                 </div>
 
-                <button className="inline-flex items-center text-accent group/btn font-semibold hover:text-primary transition-colors">
+                <button 
+                  onClick={() => scrollToSection('#contact')}
+                  className="inline-flex items-center text-accent group/btn font-semibold hover:text-primary transition-colors"
+                >
                   Explore Destination
                   <ChevronRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>

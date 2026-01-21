@@ -2,6 +2,7 @@
 
 import { ChevronRight, Eye, Crown, MapPin, Binary as Binoculars, Compass } from 'lucide-react';
 import Image from 'next/image';
+import { scrollToSection } from '@/lib/utils';
 
 const Hero = () => {
   return (
@@ -32,12 +33,18 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="inline-flex items-center justify-center px-8 py-4 bg-accent text-black text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl hover:scale-105 drop-shadow-lg">
+          <button 
+            onClick={() => scrollToSection('#bespoke')}
+            className="inline-flex items-center justify-center px-8 py-4 bg-accent text-black text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl hover:scale-105 drop-shadow-lg"
+          >
             Start Your Adventure
             <ChevronRight className="ml-3 h-5 w-5" />
           </button>
           
-          <button className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-md">
+          <button 
+            onClick={() => scrollToSection('#experiences')}
+            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-md"
+          >
             Explore Experiences
           </button>
         </div>

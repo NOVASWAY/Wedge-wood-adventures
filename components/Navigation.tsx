@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Menu, X, ChevronRight } from 'lucide-react';
+import { scrollToSection } from '@/lib/utils';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +52,11 @@ const Navigation = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200 hover:bg-accent/10 rounded-md"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.href);
+                }}
+                className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200 hover:bg-accent/10 rounded-md cursor-pointer"
               >
                 {item.label}
               </a>
@@ -60,7 +65,10 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <button className="inline-flex items-center px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors duration-200 hover:shadow-lg">
+            <button 
+              onClick={() => scrollToSection('#bespoke')}
+              className="inline-flex items-center px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors duration-200 hover:shadow-lg"
+            >
               Request a Safari
               <ChevronRight className="ml-2 h-4 w-4" />
             </button>
@@ -83,13 +91,23 @@ const Navigation = () => {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-accent/10 transition-colors"
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.href);
+                    setIsOpen(false);
+                  }}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-accent/10 transition-colors cursor-pointer"
                 >
                   {item.label}
                 </a>
               ))}
-              <button className="w-full mt-4 px-3 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors text-left flex items-center">
+              <button 
+                onClick={() => {
+                  scrollToSection('#bespoke');
+                  setIsOpen(false);
+                }}
+                className="w-full mt-4 px-3 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors text-left flex items-center"
+              >
                 Request a Safari
                 <ChevronRight className="ml-2 h-4 w-4" />
               </button>
