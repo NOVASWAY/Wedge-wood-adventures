@@ -6,7 +6,7 @@ import { scrollToSection } from '@/lib/utils';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20 pb-8 sm:pb-0">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20">
       {/* Background image */}
       <Image 
         src="/safari-hero.jpg" 
@@ -16,27 +16,27 @@ const Hero = () => {
         priority
       />
       
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50 z-5" />
+      {/* Dark overlay for text readability - Stronger on mobile */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60 z-5" />
       
       {/* Decorative elements with color priming - Reduced on mobile */}
       <div className="absolute top-20 right-0 w-48 h-48 sm:w-96 sm:h-96 bg-accent/10 rounded-full blur-3xl z-1" />
       <div className="absolute bottom-0 left-0 w-36 h-36 sm:w-72 sm:h-72 bg-primary/10 rounded-full blur-3xl z-1" />
 
-      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
-        <div className="space-y-6 sm:space-y-8">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white leading-tight text-balance drop-shadow-lg">
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full flex flex-col justify-center min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-5rem)]">
+        <div className="space-y-4 sm:space-y-6 md:space-y-8">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.1] text-balance drop-shadow-2xl px-1">
             Venture Beyond the Horizon
           </h1>
           
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md px-2">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-lg px-3">
             Immerse yourself in Africa's untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center pt-2">
             <button 
               onClick={() => scrollToSection('#bespoke')}
-              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-accent text-black text-base sm:text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl active:scale-95 drop-shadow-lg min-h-[48px] w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-accent text-black text-base sm:text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl active:scale-95 drop-shadow-lg min-h-[52px] w-full sm:w-auto"
             >
               Start Your Adventure
               <ChevronRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
@@ -44,15 +44,15 @@ const Hero = () => {
             
             <button 
               onClick={() => scrollToSection('#experiences')}
-              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-md active:scale-95 min-h-[48px] w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-white/60 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-lg active:scale-95 min-h-[52px] w-full sm:w-auto"
             >
               Explore Experiences
             </button>
           </div>
         </div>
 
-        {/* Value Propositions - Hidden on very small screens, shown on larger */}
-        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 md:mt-20">
+        {/* Value Propositions - Completely hidden on mobile, shown on tablet and up */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-16 md:mt-20">
           {[
             { icon: Eye, title: 'Expert Guides', desc: 'Naturalists with decades of safari expertise' },
             { icon: MapPin, title: 'Exclusive Access', desc: 'Private reserves and intimate wildlife moments' },

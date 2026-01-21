@@ -36,15 +36,17 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Image 
-              src="/logo.png" 
-              alt="Wedgewood Adventures Kenya" 
-              width={50}
-              height={50}
-              className="h-10 w-10 sm:h-12 sm:w-auto object-contain"
-              priority
-            />
+          <div className="flex-shrink-0 flex items-center z-10">
+            <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }}>
+              <Image 
+                src="/logo.png" 
+                alt="Wedgewood Adventures Kenya" 
+                width={50}
+                height={50}
+                className="h-10 w-10 sm:h-12 sm:w-auto object-contain drop-shadow-lg"
+                priority
+              />
+            </a>
           </div>
 
           {/* Desktop Navigation */}
