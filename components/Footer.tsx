@@ -22,7 +22,7 @@ const Footer = () => {
               />
               <div>
                 <h2 className="font-serif font-bold text-foreground">Wedgewood</h2>
-                <p className="text-xs text-foreground/60">Adventures Kenya</p>
+                <p className="text-xs text-foreground/60">Adventure safaris</p>
               </div>
             </div>
             <p className="text-sm text-foreground/70 leading-relaxed">
@@ -90,7 +90,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col sm:flex-row items-center justify-between">
           <p className="text-sm text-foreground/60 mb-4 sm:mb-0">
-            © {currentYear} Wedgewood Adventures Kenya. All rights reserved.
+            © {currentYear} Wedgewood Adventure Safaris. All rights reserved.
           </p>
 
           <div className="flex items-center gap-1 text-sm text-foreground/60">
