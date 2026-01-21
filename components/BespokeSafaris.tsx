@@ -29,26 +29,26 @@ const BespokeSafaris = () => {
   };
 
   return (
-    <section id="bespoke" className="py-20 sm:py-28 bg-background">
+    <section id="bespoke" className="py-24 sm:py-32 md:py-40 bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-14 sm:mb-18 md:mb-20">
           <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Design Your Journey</span>
-          <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-foreground">
+          <h2 className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground">
             Create Your Bespoke Safari
           </h2>
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Begin your journey toward an unforgettable African experience. Tell us about your dreams, and we'll craft the perfect itinerary.
           </p>
         </div>
 
         <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl">
-          <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-7 sm:space-y-8 md:space-y-10">
             {/* Quick Details */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-              <div className="space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+              <div className="space-y-3">
                 <label className="flex items-center text-xs sm:text-sm font-semibold text-foreground">
                   <Calendar className="h-3 sm:h-4 w-3 sm:w-4 mr-2 text-accent" />
-                  Preferred Dates
+                  Travel Dates
                 </label>
                 <input
                   type="text"
@@ -114,7 +114,7 @@ const BespokeSafaris = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 md:gap-8">
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-foreground block">Full Name</label>
                 <input

@@ -29,20 +29,20 @@ const Gallery = () => {
   };
 
   return (
-    <section id="gallery" className="py-20 sm:py-28 bg-card">
+    <section id="gallery" className="py-24 sm:py-32 md:py-40 bg-card">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider">Our World</span>
-          <h2 className="mt-4 text-4xl sm:text-5xl font-serif font-bold text-foreground">
+        <div className="text-center mb-14 sm:mb-18 md:mb-20">
+          <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Our World</span>
+          <h2 className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground">
             Experience Gallery
           </h2>
-          <p className="mt-4 text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             A glimpse into the extraordinary moments our guests have experienced across Kenya.
           </p>
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 md:gap-8">
           {gallery.map((item, idx) => (
             <div
               key={item.id}

@@ -36,19 +36,19 @@ const Experiences = () => {
   ];
 
   return (
-    <section id="experiences" className="py-20 sm:py-28 bg-background">
+    <section id="experiences" className="py-24 sm:py-32 md:py-40 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-14 sm:mb-18 md:mb-20">
           <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Our Offerings</span>
-          <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-foreground">
+          <h2 className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground">
             Luxury Safari Experiences
           </h2>
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Discover curated adventures designed for those who demand the finest in African exploration.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-8 md:gap-10">
           {experiences.map((exp, idx) => {
             const Icon = exp.icon;
             return (
@@ -71,12 +71,12 @@ const Experiences = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-5 sm:p-8">
-                  <h3 className="text-lg sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
+                <div className="p-6 sm:p-8">
+                  <h3 className="text-lg sm:text-2xl font-semibold text-foreground mb-4 sm:mb-4">
                     {exp.title}
                   </h3>
                   
-                  <p className="text-sm sm:text-base text-foreground/70 leading-relaxed mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-foreground/70 leading-relaxed mb-6 sm:mb-8">
                     {exp.description}
                   </p>
 

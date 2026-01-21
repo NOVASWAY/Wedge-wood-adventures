@@ -4,21 +4,21 @@ import { MessageCircle, Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-card">
+    <section id="contact" className="py-24 sm:py-32 md:py-40 bg-card">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-14 sm:mb-18 md:mb-20">
           <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Get in Touch</span>
-          <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-foreground">
+          <h2 className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground">
             Begin Your Journey
           </h2>
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Our concierge team is ready to craft your bespoke safari experience.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 md:gap-16">
           {/* Contact Info */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-7 sm:space-y-9">
             <div className="flex gap-4 sm:gap-6 items-start">
               <div className="flex-shrink-0">
                 <div className="flex items-center justify-center h-10 sm:h-12 w-10 sm:w-12 rounded-lg bg-accent/20">
@@ -72,10 +72,10 @@ const Contact = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="space-y-3 pt-4">
+            <div className="space-y-4 pt-8 sm:pt-10">
               <a
                 href="https://wa.me/254748132915"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 sm:py-4 bg-green-600 text-white text-sm sm:text-base font-semibold rounded-lg hover:bg-green-700 transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
                 Chat on WhatsApp
@@ -83,7 +83,7 @@ const Contact = () => {
               
               <a
                 href="tel:+254748132915"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition-colors"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 sm:py-4 border-2 border-primary text-primary text-sm sm:text-base font-semibold rounded-lg hover:bg-primary/5 transition-colors"
               >
                 <Phone className="h-5 w-5" />
                 Call Now
@@ -92,55 +92,55 @@ const Contact = () => {
           </div>
 
           {/* Quick Contact Form */}
-          <div className="bg-background border border-border rounded-xl p-8">
-            <h3 className="text-2xl font-semibold text-foreground mb-6">
+          <div className="bg-background border border-border rounded-xl p-6 sm:p-8 md:p-10">
+            <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-8 sm:mb-10">
               Quick Inquiry
             </h3>
 
-            <form className="space-y-4">
+            <form className="space-y-6 sm:space-y-7">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-foreground mb-3">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
                   placeholder="Your name"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-foreground mb-3">
                   Email
                 </label>
                 <input
                   type="email"
-                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
                   placeholder="your@email.com"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-foreground mb-3">
                   Message
                 </label>
                 <textarea
                   rows={4}
-                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
+                  className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
                   placeholder="Tell us about your safari dreams..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center hover:shadow-lg"
+                className="w-full py-3 sm:py-4 text-sm sm:text-base bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center hover:shadow-lg"
               >
                 Send Inquiry
                 <ChevronRight className="ml-2 h-4 w-4" />
               </button>
             </form>
 
-            <p className="text-xs text-foreground/60 mt-4 text-center">
+            <p className="text-xs text-foreground/60 mt-6 sm:mt-8 text-center">
               We respect your privacy. Your information is secure with us.
             </p>
           </div>

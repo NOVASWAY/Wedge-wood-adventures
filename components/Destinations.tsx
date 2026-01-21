@@ -36,19 +36,19 @@ const Destinations = () => {
   ];
 
   return (
-    <section id="destinations" className="py-20 sm:py-28 bg-card">
+    <section id="destinations" className="py-24 sm:py-32 md:py-40 bg-card">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider">Explore</span>
-          <h2 className="mt-4 text-4xl sm:text-5xl font-serif font-bold text-foreground">
+        <div className="text-center mb-14 sm:mb-18 md:mb-20">
+          <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Explore</span>
+          <h2 className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground">
             Premium Destinations
           </h2>
-          <p className="mt-4 text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Each destination offers unique wildlife, landscapes, and cultural experiences.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-8 md:gap-10">
           {destinations.map((dest, idx) => (
             <div
               key={idx}
@@ -65,19 +65,19 @@ const Destinations = () => {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
               </div>
 
-              <div className="p-8 relative z-10">
-                <h3 className="text-2xl font-serif font-bold text-foreground mb-1">
+              <div className="p-6 sm:p-8 relative z-10">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-foreground mb-2 sm:mb-3">
                   {dest.name}
                 </h3>
-                <p className="text-sm text-accent font-semibold mb-4">
+                <p className="text-xs sm:text-sm text-accent font-semibold mb-5 sm:mb-6">
                   {dest.tagline}
                 </p>
 
-                <p className="text-foreground/70 leading-relaxed mb-6">
+                <p className="text-sm sm:text-base text-foreground/70 leading-relaxed mb-6 sm:mb-8">
                   {dest.description}
                 </p>
 
-                <div className="space-y-2 mb-6">
+                <div className="space-y-3 mb-6 sm:mb-8">
                   {dest.highlights.map((highlight, hidx) => (
                     <div key={hidx} className="flex items-center space-x-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-accent" />

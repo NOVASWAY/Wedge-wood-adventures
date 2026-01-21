@@ -22,16 +22,16 @@ const Hero = () => {
       <div className="absolute top-20 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl z-1" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl z-1" />
 
-      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-4 sm:mb-6 leading-tight text-balance drop-shadow-lg">
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-0">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-6 sm:mb-8 leading-tight text-balance drop-shadow-lg">
           Venture Beyond the Horizon
         </h1>
         
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-10 sm:mb-16 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md">
           Immerse yourself in Africa's untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
         </p>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center w-full sm:w-auto">
+        <div className="flex flex-col gap-4 sm:flex-row sm:gap-4 justify-center w-full sm:w-auto mb-10 sm:mb-14">
           <button className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-accent text-black text-base sm:text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl hover:scale-105 drop-shadow-lg w-full sm:w-auto">
             Start Your Adventure
             <ChevronRight className="ml-2 sm:ml-3 h-4 sm:h-5 w-4 sm:w-5" />
@@ -43,7 +43,7 @@ const Hero = () => {
         </div>
 
         {/* Value Propositions */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 md:mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 md:gap-8 mt-16 sm:mt-20 md:mt-24">
           {[
             { icon: Eye, title: 'Expert Guides', desc: 'Naturalists with decades of safari expertise' },
             { icon: MapPin, title: 'Exclusive Access', desc: 'Private reserves and intimate wildlife moments' },
@@ -53,7 +53,7 @@ const Hero = () => {
             return (
               <div 
                 key={idx} 
-                className="group space-y-2 sm:space-y-3 bg-black/30 backdrop-blur-sm rounded-lg p-4 sm:p-6 hover:bg-black/40 transition-all duration-300 hover:scale-105"
+                className="group space-y-3 sm:space-y-4 bg-black/30 backdrop-blur-sm rounded-lg p-5 sm:p-7 hover:bg-black/40 transition-all duration-300 hover:scale-105"
                 style={{
                   animation: `slideUp 0.6s ease-out ${idx * 0.1}s backwards`
                 }}
