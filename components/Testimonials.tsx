@@ -27,12 +27,12 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="py-20 sm:py-28 bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider">Voices</span>
-          <h2 className="mt-4 text-4xl sm:text-5xl font-serif font-bold text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Voices</span>
+          <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-foreground">
             Guest Testimonials
           </h2>
-          <p className="mt-4 text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
             Hear from travelers who have experienced the Wedgewood difference.
           </p>
         </div>
@@ -54,7 +54,7 @@ const Testimonials = () => {
               </div>
 
               {/* Testimonial text */}
-              <blockquote className="text-foreground/80 leading-relaxed mb-6 italic">
+              <blockquote className="text-sm sm:text-base text-foreground/80 leading-relaxed mb-4 sm:mb-6 italic">
                 "{testimonial.text}"
               </blockquote>
 
@@ -72,23 +72,21 @@ const Testimonials = () => {
         </div>
 
         {/* Trust Badge */}
-        <div className="mt-12 sm:mt-16 md:mt-20 bg-gradient-to-r from-accent/5 via-primary/5 to-accent/5 border border-border rounded-xl p-6 sm:p-8 text-center">
-          <p className="text-sm sm:text-base text-foreground/70 mb-4 sm:mb-3 px-2">
+        <div className="mt-12 sm:mt-20 bg-gradient-to-r from-accent/5 via-primary/5 to-accent/5 border border-border rounded-xl p-6 sm:p-8 text-center">
+          <p className="text-xs sm:text-sm text-foreground/70 mb-6">
             Join discerning travelers who trust Wedgewood Adventures for their most precious journeys.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm text-foreground/60">
+          <div className="grid grid-cols-3 gap-4 text-xs sm:text-sm text-foreground/60">
             <div>
-              <span className="font-semibold text-foreground block text-lg">500+</span>
+              <span className="font-semibold text-foreground text-lg sm:text-2xl block">500+</span>
               <span>Happy Guests</span>
             </div>
-            <div className="hidden sm:block w-px h-8 bg-border" />
             <div>
-              <span className="font-semibold text-foreground block text-lg">50+</span>
+              <span className="font-semibold text-foreground text-lg sm:text-2xl block">50+</span>
               <span>Destinations</span>
             </div>
-            <div className="hidden sm:block w-px h-8 bg-border" />
             <div>
-              <span className="font-semibold text-foreground block text-lg">100%</span>
+              <span className="font-semibold text-foreground text-lg sm:text-2xl block">100%</span>
               <span>Satisfaction</span>
             </div>
           </div>

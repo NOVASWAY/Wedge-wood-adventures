@@ -2,15 +2,14 @@
 
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
-import { scrollToSection } from '@/lib/utils';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-gradient-to-b from-card to-background border-t border-border">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -34,22 +33,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Explore</h3>
             <ul className="space-y-2 text-sm">
-              {[
-                { label: 'Experiences', href: '#experiences' },
-                { label: 'Destinations', href: '#destinations' },
-                { label: 'Bespoke Safaris', href: '#bespoke' },
-                { label: 'Gallery', href: '#gallery' }
-              ].map((item) => (
-                <li key={item.label}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(item.href);
-                    }}
-                    className="text-foreground/70 hover:text-accent transition-colors cursor-pointer"
-                  >
-                    {item.label}
+              {['Experiences', 'Destinations', 'Bespoke Safaris', 'Gallery'].map((link) => (
+                <li key={link}>
+                  <a href="#" className="text-foreground/70 hover:text-accent transition-colors">
+                    {link}
                   </a>
                 </li>
               ))}
@@ -60,20 +47,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Company</h3>
             <ul className="space-y-2 text-sm">
-              {[
-                { label: 'About Us', href: '#about' },
-                { label: 'Contact', href: '#contact' }
-              ].map((item) => (
-                <li key={item.label}>
-                  <a 
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(item.href);
-                    }}
-                    className="text-foreground/70 hover:text-accent transition-colors cursor-pointer"
-                  >
-                    {item.label}
+              {['About Us', 'Our Team', 'Blog', 'Careers'].map((link) => (
+                <li key={link}>
+                  <a href="#" className="text-foreground/70 hover:text-accent transition-colors">
+                    {link}
                   </a>
                 </li>
               ))}

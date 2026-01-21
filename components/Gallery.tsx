@@ -68,28 +68,22 @@ const Gallery = () => {
 
         {/* Lightbox Modal */}
         {selectedIdx !== null && (
-          <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4" onClick={() => setSelectedIdx(null)}>
+          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedIdx(null);
-              }}
-              className="absolute top-4 right-4 text-white hover:text-accent transition-colors p-2 z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              onClick={() => setSelectedIdx(null)}
+              className="absolute top-4 right-4 text-white hover:text-accent transition-colors p-2"
             >
               <X className="h-6 w-6" />
             </button>
 
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prevImage();
-              }}
-              className="absolute left-2 sm:left-4 text-white hover:text-accent transition-colors p-2 z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              onClick={prevImage}
+              className="absolute left-4 text-white hover:text-accent transition-colors p-2 hidden sm:block"
             >
-              <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" />
+              <ChevronLeft className="h-8 w-8" />
             </button>
 
-            <div className="text-center max-w-2xl w-full" onClick={(e) => e.stopPropagation()}>
+            <div className="text-center max-w-2xl">
               <div className="relative w-full aspect-square rounded-xl mb-4 overflow-hidden">
                 <Image 
                   src={gallery[selectedIdx].image || "/placeholder.svg"}
@@ -99,24 +93,21 @@ const Gallery = () => {
                 />
               </div>
 
-              <div className="space-y-2 px-4">
-                <h3 className="text-white text-lg sm:text-2xl font-semibold">{gallery[selectedIdx].title}</h3>
-                <p className="text-white/60 text-xs sm:text-sm">{gallery[selectedIdx].category}</p>
+              <div className="space-y-2">
+                <h3 className="text-white text-2xl font-semibold">{gallery[selectedIdx].title}</h3>
+                <p className="text-white/60 text-sm">{gallery[selectedIdx].category}</p>
               </div>
 
-              <div className="mt-4 sm:mt-6 text-white/60 text-xs sm:text-sm">
+              <div className="mt-6 text-white/60 text-sm">
                 {selectedIdx + 1} / {gallery.length}
               </div>
             </div>
 
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                nextImage();
-              }}
-              className="absolute right-2 sm:right-4 text-white hover:text-accent transition-colors p-2 z-10 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              onClick={nextImage}
+              className="absolute right-4 text-white hover:text-accent transition-colors p-2 hidden sm:block"
             >
-              <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" />
+              <ChevronRight className="h-8 w-8" />
             </button>
           </div>
         )}

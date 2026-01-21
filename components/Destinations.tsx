@@ -2,7 +2,6 @@
 
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import { scrollToSection } from '@/lib/utils';
 
 const Destinations = () => {
   const destinations = [
@@ -66,31 +65,28 @@ const Destinations = () => {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
               </div>
 
-              <div className="p-6 sm:p-8 relative z-10">
-                <h3 className="text-xl sm:text-2xl font-serif font-bold text-foreground mb-1">
+              <div className="p-8 relative z-10">
+                <h3 className="text-2xl font-serif font-bold text-foreground mb-1">
                   {dest.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-accent font-semibold mb-3 sm:mb-4">
+                <p className="text-sm text-accent font-semibold mb-4">
                   {dest.tagline}
                 </p>
 
-                <p className="text-sm sm:text-base text-foreground/70 leading-relaxed mb-4 sm:mb-6">
+                <p className="text-foreground/70 leading-relaxed mb-6">
                   {dest.description}
                 </p>
 
-                <div className="space-y-2 mb-4 sm:mb-6">
+                <div className="space-y-2 mb-6">
                   {dest.highlights.map((highlight, hidx) => (
                     <div key={hidx} className="flex items-center space-x-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                      <span className="text-xs sm:text-sm text-foreground/70">{highlight}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                      <span className="text-sm text-foreground/70">{highlight}</span>
                     </div>
                   ))}
                 </div>
 
-                <button 
-                  onClick={() => scrollToSection('#contact')}
-                  className="inline-flex items-center text-accent group/btn font-semibold hover:text-primary transition-colors min-h-[44px]"
-                >
+                <button className="inline-flex items-center text-accent group/btn font-semibold hover:text-primary transition-colors">
                   Explore Destination
                   <ChevronRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>

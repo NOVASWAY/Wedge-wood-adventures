@@ -1,88 +1,60 @@
 'use client';
 
-import { useState } from 'react';
 import { MessageCircle, Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Create email subject and body
-    const subject = encodeURIComponent(`Safari Inquiry from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-    
-    // Create mailto link
-    const mailtoLink = `mailto:wedgewoodadventuresafaris@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-  };
-
   return (
     <section id="contact" className="py-20 sm:py-28 bg-card">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider">Get in Touch</span>
-          <h2 className="mt-4 text-4xl sm:text-5xl font-serif font-bold text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Get in Touch</span>
+          <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-foreground">
             Begin Your Journey
           </h2>
-          <p className="mt-4 text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
             Our concierge team is ready to craft your bespoke safari experience.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Info */}
           <div className="space-y-6 sm:space-y-8">
-            <div className="flex gap-6 items-start">
+            <div className="flex gap-4 sm:gap-6 items-start">
               <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-accent/20">
-                  <Phone className="h-6 w-6 text-accent" />
+                <div className="flex items-center justify-center h-10 sm:h-12 w-10 sm:w-12 rounded-lg bg-accent/20">
+                  <Phone className="h-5 sm:h-6 w-5 sm:w-6 text-accent" />
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-foreground">Direct Phone</h3>
-                <p className="text-foreground/70">+254 748 132 915</p>
-                <p className="text-sm text-foreground/60">Mon-Sat, 8am-6pm EAT</p>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground">Direct Phone</h3>
+                <p className="text-sm sm:text-base text-foreground/70">+254 748 132 915</p>
+                <p className="text-xs sm:text-sm text-foreground/60">Mon-Sat, 8am-6pm EAT</p>
               </div>
             </div>
 
-            <div className="flex gap-6 items-start">
+            <div className="flex gap-4 sm:gap-6 items-start">
               <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-accent/20">
-                  <Mail className="h-6 w-6 text-accent" />
+                <div className="flex items-center justify-center h-10 sm:h-12 w-10 sm:w-12 rounded-lg bg-accent/20">
+                  <Mail className="h-5 sm:h-6 w-5 sm:w-6 text-accent" />
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-foreground">Email Concierge</h3>
-                <p className="text-foreground/70">wedgewoodadventuresafaris@gmail.com</p>
-                <p className="text-sm text-foreground/60">Response within 2 hours</p>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground">Email Concierge</h3>
+                <p className="text-sm sm:text-base text-foreground/70 break-all">wedgewoodadventuresafaris@gmail.com</p>
+                <p className="text-xs sm:text-sm text-foreground/60">Response within 2 hours</p>
               </div>
             </div>
 
-            <div className="flex gap-6 items-start">
+            <div className="flex gap-4 sm:gap-6 items-start">
               <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-accent/20">
-                  <MessageCircle className="h-6 w-6 text-accent" />
+                <div className="flex items-center justify-center h-10 sm:h-12 w-10 sm:w-12 rounded-lg bg-accent/20">
+                  <MessageCircle className="h-5 sm:h-6 w-5 sm:w-6 text-accent" />
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-foreground">WhatsApp</h3>
-                <p className="text-foreground/70">+254 748 132 915</p>
-                <p className="text-sm text-foreground/60">Instant messaging support</p>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground">WhatsApp</h3>
+                <p className="text-sm sm:text-base text-foreground/70">+254 748 132 915</p>
+                <p className="text-xs sm:text-sm text-foreground/60">Instant messaging support</p>
               </div>
             </div>
 
@@ -103,7 +75,7 @@ const Contact = () => {
             <div className="space-y-3 pt-4">
               <a
                 href="https://wa.me/254748132915"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors min-h-[48px]"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
                 Chat on WhatsApp
@@ -111,7 +83,7 @@ const Contact = () => {
               
               <a
                 href="tel:+254748132915"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors min-h-[48px]"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition-colors"
               >
                 <Phone className="h-5 w-5" />
                 Call Now
@@ -120,22 +92,18 @@ const Contact = () => {
           </div>
 
           {/* Quick Contact Form */}
-          <div className="bg-background border border-border rounded-xl p-6 sm:p-8">
-            <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-6">
+          <div className="bg-background border border-border rounded-xl p-8">
+            <h3 className="text-2xl font-semibold text-foreground mb-6">
               Quick Inquiry
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
                   Name
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
                   className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
                   placeholder="Your name"
                 />
@@ -147,10 +115,6 @@ const Contact = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
                   className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
                   placeholder="your@email.com"
                 />
@@ -161,10 +125,6 @@ const Contact = () => {
                   Message
                 </label>
                 <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
                   rows={4}
                   className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
                   placeholder="Tell us about your safari dreams..."
@@ -173,7 +133,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 active:bg-primary/80 transition-all flex items-center justify-center hover:shadow-lg active:scale-95 min-h-[48px]"
+                className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center hover:shadow-lg"
               >
                 Send Inquiry
                 <ChevronRight className="ml-2 h-4 w-4" />

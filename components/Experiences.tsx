@@ -2,7 +2,6 @@
 
 import { ChevronRight, Compass, Mountain, Users, TreePine } from 'lucide-react';
 import Image from 'next/image';
-import { scrollToSection } from '@/lib/utils';
 
 const Experiences = () => {
   const experiences = [
@@ -39,17 +38,17 @@ const Experiences = () => {
   return (
     <section id="experiences" className="py-20 sm:py-28 bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block text-sm font-semibold text-accent uppercase tracking-wider">Our Offerings</span>
-          <h2 className="mt-4 text-4xl sm:text-5xl font-serif font-bold text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Our Offerings</span>
+          <h2 className="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-5xl font-serif font-bold text-foreground">
             Luxury Safari Experiences
           </h2>
-          <p className="mt-4 text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto">
             Discover curated adventures designed for those who demand the finest in African exploration.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {experiences.map((exp, idx) => {
             const Icon = exp.icon;
             return (
@@ -58,7 +57,7 @@ const Experiences = () => {
                 className="group relative bg-card border border-border rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
               >
                 {/* Image container */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-40 sm:h-48 overflow-hidden">
                   <Image 
                     src={exp.image || "/placeholder.svg"}
                     alt={exp.title}
@@ -66,14 +65,14 @@ const Experiences = () => {
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-accent rounded-full flex items-center justify-center shadow-lg">
-                    <Icon className="h-6 w-6 text-black" />
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-10 sm:w-12 h-10 sm:h-12 bg-accent rounded-full flex items-center justify-center shadow-lg">
+                    <Icon className="h-5 sm:h-6 w-5 sm:w-6 text-black" />
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-3">
+                <div className="p-5 sm:p-8">
+                  <h3 className="text-lg sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
                     {exp.title}
                   </h3>
                   
@@ -81,10 +80,7 @@ const Experiences = () => {
                     {exp.description}
                   </p>
 
-                  <button 
-                    onClick={() => scrollToSection('#bespoke')}
-                    className="inline-flex items-center text-accent hover:text-primary font-semibold transition-colors group/btn min-h-[44px]"
-                  >
+                  <button className="inline-flex items-center text-accent hover:text-primary font-semibold transition-colors group/btn">
                     {exp.cta}
                     <ChevronRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
