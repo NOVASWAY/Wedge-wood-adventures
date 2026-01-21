@@ -24,33 +24,33 @@ const Hero = () => {
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl z-1" />
 
       <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight text-balance drop-shadow-lg">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-4 sm:mb-6 leading-tight text-balance drop-shadow-lg px-2">
           Venture Beyond the Horizon
         </h1>
         
-        <p className="text-lg sm:text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md">
+        <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md px-2">
           Immerse yourself in Africa's untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2">
           <button 
             onClick={() => scrollToSection('#bespoke')}
-            className="inline-flex items-center justify-center px-8 py-4 bg-accent text-black text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl hover:scale-105 drop-shadow-lg"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-accent text-black text-base sm:text-lg font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl active:scale-95 drop-shadow-lg min-h-[48px]"
           >
             Start Your Adventure
-            <ChevronRight className="ml-3 h-5 w-5" />
+            <ChevronRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5" />
           </button>
           
           <button 
             onClick={() => scrollToSection('#experiences')}
-            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-md"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold drop-shadow-md active:scale-95 min-h-[48px]"
           >
             Explore Experiences
           </button>
         </div>
 
         {/* Value Propositions */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 md:mt-20 px-2">
           {[
             { icon: Eye, title: 'Expert Guides', desc: 'Naturalists with decades of safari expertise' },
             { icon: MapPin, title: 'Exclusive Access', desc: 'Private reserves and intimate wildlife moments' },
@@ -60,17 +60,17 @@ const Hero = () => {
             return (
               <div 
                 key={idx} 
-                className="group space-y-3 bg-black/30 backdrop-blur-sm rounded-lg p-6 hover:bg-black/40 transition-all duration-300 hover:scale-105"
+                className="group space-y-2 sm:space-y-3 bg-black/30 backdrop-blur-sm rounded-lg p-4 sm:p-6 hover:bg-black/40 transition-all duration-300 hover:scale-105"
                 style={{
                   animation: `slideUp 0.6s ease-out ${idx * 0.1}s backwards`
                 }}
               >
                 <div className="relative">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-accent/60 mx-auto flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300" 
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-accent to-accent/60 mx-auto flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300" 
                     style={{
                       animation: `pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite ${idx * 0.3}s`
                     }}>
-                    <Icon className="w-8 h-8 text-black group-hover:scale-110 transition-transform duration-300" />
+                    <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-black group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div 
                     className="absolute inset-0 rounded-full bg-accent/20"
@@ -79,8 +79,8 @@ const Hero = () => {
                     }}
                   />
                 </div>
-                <h3 className="font-semibold text-white text-lg">{item.title}</h3>
-                <p className="text-sm text-white/80 leading-relaxed">{item.desc}</p>
+                <h3 className="font-semibold text-white text-base sm:text-lg">{item.title}</h3>
+                <p className="text-xs sm:text-sm text-white/80 leading-relaxed">{item.desc}</p>
               </div>
             );
           })}

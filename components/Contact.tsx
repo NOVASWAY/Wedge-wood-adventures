@@ -44,9 +44,9 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
           {/* Contact Info */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div className="flex gap-6 items-start">
               <div className="flex-shrink-0">
                 <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-accent/20">
@@ -103,7 +103,7 @@ const Contact = () => {
             <div className="space-y-3 pt-4">
               <a
                 href="https://wa.me/254748132915"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors min-h-[48px]"
               >
                 <MessageCircle className="h-5 w-5" />
                 Chat on WhatsApp
@@ -111,7 +111,7 @@ const Contact = () => {
               
               <a
                 href="tel:+254748132915"
-                className="flex items-center justify-center gap-2 w-full px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition-colors"
+                className="flex items-center justify-center gap-2 w-full px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors min-h-[48px]"
               >
                 <Phone className="h-5 w-5" />
                 Call Now
@@ -120,8 +120,8 @@ const Contact = () => {
           </div>
 
           {/* Quick Contact Form */}
-          <div className="bg-background border border-border rounded-xl p-8">
-            <h3 className="text-2xl font-semibold text-foreground mb-6">
+          <div className="bg-background border border-border rounded-xl p-6 sm:p-8">
+            <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-6">
               Quick Inquiry
             </h3>
 
@@ -173,7 +173,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center hover:shadow-lg"
+                className="w-full py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 active:bg-primary/80 transition-all flex items-center justify-center hover:shadow-lg active:scale-95 min-h-[48px]"
               >
                 Send Inquiry
                 <ChevronRight className="ml-2 h-4 w-4" />

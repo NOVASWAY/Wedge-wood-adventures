@@ -55,7 +55,7 @@ const About = () => {
 
             <button 
               onClick={() => scrollToSection('#contact')}
-              className="mt-8 inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors"
+              className="mt-6 sm:mt-8 inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 active:bg-primary/80 transition-colors min-h-[48px] w-full sm:w-auto justify-center"
             >
               Learn Our Story
             </button>

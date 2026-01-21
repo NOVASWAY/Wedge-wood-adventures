@@ -72,18 +72,18 @@ const Experiences = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-8">
-                  <h3 className="text-2xl font-semibold text-foreground mb-3">
+                <div className="p-6 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-3">
                     {exp.title}
                   </h3>
                   
-                  <p className="text-foreground/70 leading-relaxed mb-6">
+                  <p className="text-sm sm:text-base text-foreground/70 leading-relaxed mb-4 sm:mb-6">
                     {exp.description}
                   </p>
 
                   <button 
                     onClick={() => scrollToSection('#bespoke')}
-                    className="inline-flex items-center text-accent hover:text-primary font-semibold transition-colors group/btn"
+                    className="inline-flex items-center text-accent hover:text-primary font-semibold transition-colors group/btn min-h-[44px]"
                   >
                     {exp.cta}
                     <ChevronRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />

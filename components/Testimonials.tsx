@@ -37,11 +37,11 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
-              className="bg-card border border-border rounded-xl p-8 hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              className="bg-card border border-border rounded-xl p-6 sm:p-8 hover:border-accent/50 hover:shadow-xl transition-all duration-300"
             >
               {/* Star rating */}
               <div className="flex gap-1.5 mb-4">
@@ -72,23 +72,23 @@ const Testimonials = () => {
         </div>
 
         {/* Trust Badge */}
-        <div className="mt-20 bg-gradient-to-r from-accent/5 via-primary/5 to-accent/5 border border-border rounded-xl p-8 text-center">
-          <p className="text-foreground/70 mb-3">
+        <div className="mt-12 sm:mt-16 md:mt-20 bg-gradient-to-r from-accent/5 via-primary/5 to-accent/5 border border-border rounded-xl p-6 sm:p-8 text-center">
+          <p className="text-sm sm:text-base text-foreground/70 mb-4 sm:mb-3 px-2">
             Join discerning travelers who trust Wedgewood Adventures for their most precious journeys.
           </p>
-          <div className="flex items-center justify-center space-x-6 text-sm text-foreground/60">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm text-foreground/60">
             <div>
-              <span className="font-semibold text-foreground block">500+</span>
+              <span className="font-semibold text-foreground block text-lg">500+</span>
               <span>Happy Guests</span>
             </div>
-            <div className="w-px h-8 bg-border" />
+            <div className="hidden sm:block w-px h-8 bg-border" />
             <div>
-              <span className="font-semibold text-foreground block">50+</span>
+              <span className="font-semibold text-foreground block text-lg">50+</span>
               <span>Destinations</span>
             </div>
-            <div className="w-px h-8 bg-border" />
+            <div className="hidden sm:block w-px h-8 bg-border" />
             <div>
-              <span className="font-semibold text-foreground block">100%</span>
+              <span className="font-semibold text-foreground block text-lg">100%</span>
               <span>Satisfaction</span>
             </div>
           </div>

@@ -83,10 +83,10 @@ Phone: ${formData.phone}`;
           </p>
         </div>
 
-        <div className="bg-card border border-border rounded-2xl p-8 sm:p-12 shadow-xl">
-          <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="bg-card border border-border rounded-2xl p-6 sm:p-8 md:p-12 shadow-xl">
+          <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
             {/* Quick Details */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="flex items-center text-sm font-semibold text-foreground">
@@ -96,9 +96,9 @@ Phone: ${formData.phone}`;
                   <button
                     type="button"
                     onClick={() => setDateInputMode(dateInputMode === 'calendar' ? 'text' : 'calendar')}
-                    className="text-xs text-accent hover:text-primary transition-colors"
+                    className="text-xs text-accent hover:text-primary transition-colors px-2 py-1 -mr-2 min-h-[32px] flex items-center"
                   >
-                    {dateInputMode === 'calendar' ? 'Type instead' : 'Use calendar'}
+                    {dateInputMode === 'calendar' ? 'Type' : 'Calendar'}
                   </button>
                 </div>
                 
@@ -122,19 +122,21 @@ Phone: ${formData.phone}`;
                         )}
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 bg-popover" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={selectedDate}
-                        onSelect={handleDateSelect}
-                        defaultMonth={selectedDate || new Date()}
-                        fromYear={2024}
-                        toYear={2030}
-                        className="rounded-md border-0"
-                        modifiersClassNames={{
-                          selected: "bg-primary text-primary-foreground"
-                        }}
-                      />
+                    <PopoverContent className="w-auto p-0 bg-popover" align="start" sideOffset={4} alignOffset={0}>
+                      <div className="p-2 sm:p-3">
+                        <Calendar
+                          mode="single"
+                          selected={selectedDate}
+                          onSelect={handleDateSelect}
+                          defaultMonth={selectedDate || new Date()}
+                          fromYear={2024}
+                          toYear={2030}
+                          className="rounded-md border-0"
+                          modifiersClassNames={{
+                            selected: "bg-primary text-primary-foreground"
+                          }}
+                        />
+                      </div>
                       <div className="p-3 border-t border-border">
                         <p className="text-xs text-muted-foreground mb-2">Or type manually:</p>
                         <input
@@ -143,7 +145,7 @@ Phone: ${formData.phone}`;
                           placeholder="e.g., July 2026 or flexible"
                           value={formData.dates}
                           onChange={handleChange}
-                          className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                          className="w-full px-3 py-2 text-sm rounded-md border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 min-h-[40px]"
                           onClick={(e) => e.stopPropagation()}
                         />
                       </div>
@@ -215,7 +217,7 @@ Phone: ${formData.phone}`;
             </div>
 
             {/* Contact Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-foreground block">Full Name</label>
                 <input
@@ -255,10 +257,10 @@ Phone: ${formData.phone}`;
 
             <button
               type="submit"
-              className="w-full py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all duration-300 flex items-center justify-center hover:shadow-xl hover:scale-105"
+              className="w-full py-3 sm:py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 active:bg-primary/80 transition-all duration-300 flex items-center justify-center hover:shadow-xl active:scale-95 min-h-[48px] text-base sm:text-lg"
             >
               Get Your Personalized Proposal
-              <ChevronRight className="ml-2 h-5 w-5" />
+              <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
             </button>
           </form>
 

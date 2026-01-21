@@ -86,7 +86,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border">
-            <div className="px-2 pt-2 pb-4 space-y-1">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               {navItems.map((item) => (
                 <a
                   key={item.href}
@@ -96,7 +96,7 @@ const Navigation = () => {
                     scrollToSection(item.href);
                     setIsOpen(false);
                   }}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-accent/10 transition-colors cursor-pointer"
+                  className="block px-4 py-3 rounded-lg text-base font-medium text-foreground hover:bg-accent/10 active:bg-accent/20 transition-colors cursor-pointer min-h-[44px] flex items-center"
                 >
                   {item.label}
                 </a>
@@ -106,7 +106,7 @@ const Navigation = () => {
                   scrollToSection('#bespoke');
                   setIsOpen(false);
                 }}
-                className="w-full mt-4 px-3 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors text-left flex items-center"
+                className="w-full mt-4 px-4 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 active:bg-primary/80 transition-colors flex items-center justify-center min-h-[48px]"
               >
                 Request a Safari
                 <ChevronRight className="ml-2 h-4 w-4" />
