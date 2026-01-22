@@ -7,7 +7,7 @@ import { getImagePath } from '@/lib/utils';
 const Destinations = () => {
   const destinations = [
     {
-      image: getImagePath('/masai-mara.jpg'),
+      image: getImagePath('/Maasai-mara.jpeg'),
       name: 'Masai Mara',
       tagline: 'Kenya\'s Crown Jewel',
       description: 'Witness the legendary Great Migration. Encounter the Big Five roaming vast golden plains, and experience Africa\'s most spectacular wildlife theater.',

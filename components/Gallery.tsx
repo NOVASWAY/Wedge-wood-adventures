@@ -9,12 +9,25 @@ const Gallery = () => {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   const gallery = [
-    { id: 1, image: getImagePath('/masai-mara.jpg'), title: 'Great Migration - Masai Mara', category: 'Landscapes' },
-    { id: 2, image: getImagePath('/elephants.jpg'), title: 'African Elephants', category: 'Wildlife' },
-    { id: 3, image: getImagePath('/maasai-culture.jpg'), title: 'Maasai Warriors', category: 'Culture' },
-    { id: 4, image: getImagePath('/lion-pride.jpg'), title: 'Majestic Lion Pride', category: 'Wildlife' },
-    { id: 5, image: getImagePath('/kilimanjaro.jpg'), title: 'Mount Kilimanjaro at Sunrise', category: 'Landscapes' },
-    { id: 6, image: getImagePath('/flamingo-lake.jpg'), title: 'Pink Flamingos - Lake Nakuru', category: 'Wildlife' },
+    // Wildlife
+    { id: 1, image: getImagePath('/elephants.jpg'), title: 'African Elephants', category: 'Wildlife', description: 'Majestic elephant herds roaming the savanna' },
+    { id: 2, image: getImagePath('/lion-pride.jpg'), title: 'Majestic Lion Pride', category: 'Wildlife', description: 'A pride of lions in their natural habitat' },
+    { id: 3, image: getImagePath('/flamingo-lake.jpg'), title: 'Pink Flamingos - Lake Nakuru', category: 'Wildlife', description: 'Thousands of flamingos creating a surreal pink landscape' },
+    { id: 4, image: getImagePath('/game-drive.jpg'), title: 'Game Drive Experience', category: 'Wildlife', description: 'Up close encounters with Kenya\'s magnificent wildlife' },
+    { id: 5, image: getImagePath('/Game-drive.jpeg'), title: 'Safari Game Drive', category: 'Wildlife', description: 'Expert-guided wildlife viewing in the heart of Africa' },
+    
+    // Landscapes & Destinations
+    { id: 6, image: getImagePath('/Maasai-mara.jpeg'), title: 'Lion Feeding - Masai Mara', category: 'Wildlife', description: 'A lioness feeding in the wild, captured during a game drive in Masai Mara' },
+    { id: 7, image: getImagePath('/Amboseli.jpeg'), title: 'Amboseli National Park', category: 'Landscapes', description: 'Elephant herds with Mount Kilimanjaro in the background' },
+    { id: 8, image: getImagePath('/kilimanjaro.jpg'), title: 'Mount Kilimanjaro at Sunrise', category: 'Landscapes', description: 'Africa\'s highest peak bathed in golden morning light' },
+    { id: 9, image: getImagePath('/tsavo.jpg'), title: 'Tsavo National Parks', category: 'Landscapes', description: 'Vast untamed wilderness with red elephants and volcanic landscapes' },
+    { id: 10, image: getImagePath('/safari-hero.jpg'), title: 'African Safari Landscape', category: 'Landscapes', description: 'The breathtaking beauty of Kenya\'s pristine wilderness' },
+    
+    // Culture
+    { id: 11, image: getImagePath('/maasai-culture.jpg'), title: 'Maasai Warriors', category: 'Culture', description: 'Authentic cultural immersion with the Maasai people' },
+    
+    // Accommodation & Experiences
+    { id: 12, image: getImagePath('/safari-camp.jpg'), title: 'Luxury Safari Camp', category: 'Accommodation', description: 'Ultra-premium camps offering comfort in the wild' },
   ];
 
   const nextImage = () => {
@@ -59,9 +72,12 @@ const Gallery = () => {
               />
 
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <h3 className="text-white font-semibold text-lg">{item.title}</h3>
-                <p className="text-white/80 text-sm">{item.category}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <h3 className="text-white font-semibold text-lg mb-1">{item.title}</h3>
+                <p className="text-white/70 text-xs uppercase tracking-wider mb-2">{item.category}</p>
+                {item.description && (
+                  <p className="text-white/90 text-sm line-clamp-2">{item.description}</p>
+                )}
               </div>
             </div>
           ))}
@@ -96,7 +112,10 @@ const Gallery = () => {
 
               <div className="space-y-2">
                 <h3 className="text-white text-2xl font-semibold">{gallery[selectedIdx].title}</h3>
-                <p className="text-white/60 text-sm">{gallery[selectedIdx].category}</p>
+                <p className="text-white/60 text-sm uppercase tracking-wider">{gallery[selectedIdx].category}</p>
+                {gallery[selectedIdx].description && (
+                  <p className="text-white/80 text-base mt-2">{gallery[selectedIdx].description}</p>
+                )}
               </div>
 
               <div className="mt-6 text-white/60 text-sm">
