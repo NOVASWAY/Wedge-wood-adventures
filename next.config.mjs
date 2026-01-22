@@ -2,9 +2,6 @@
 const basePath = '/Wedge-wood-adventures';
 
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
   },
