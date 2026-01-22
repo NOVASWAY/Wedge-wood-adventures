@@ -1,8 +1,57 @@
 'use client';
 
+import { useState } from 'react';
 import { MessageCircle, Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Create WhatsApp message
+    const message = `*Quick Inquiry*\n\n` +
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Message: ${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/254748132915?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+
+    // Simulate form submission delay
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 5000);
+    }, 1000);
+  };
   return (
     <section id="contact" className="py-24 sm:py-32 md:py-40 bg-card">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,13 +146,17 @@ const Contact = () => {
               Quick Inquiry
             </h3>
 
-            <form className="space-y-6 sm:space-y-7">
+            <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-7">
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-foreground mb-3">
                   Name
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name || ''}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
                   placeholder="Your name"
                 />
@@ -115,6 +168,10 @@ const Contact = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email || ''}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
                   placeholder="your@email.com"
                 />
@@ -125,18 +182,31 @@ const Contact = () => {
                   Message
                 </label>
                 <textarea
+                  name="message"
+                  value={formData.message || ''}
+                  onChange={handleChange}
+                  required
                   rows={4}
                   className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
                   placeholder="Tell us about your safari dreams..."
                 />
               </div>
 
+              {submitSuccess && (
+                <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                  <p className="text-sm text-green-800 dark:text-green-200 text-center">
+                    ✓ Thank you! Your inquiry has been sent. We'll respond within 2 hours.
+                  </p>
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full py-3 sm:py-4 text-sm sm:text-base bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center hover:shadow-lg"
+                disabled={isSubmitting}
+                className="w-full py-3 sm:py-4 text-sm sm:text-base bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Inquiry
-                <ChevronRight className="ml-2 h-4 w-4" />
+                {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+                {!isSubmitting && <ChevronRight className="ml-2 h-4 w-4" />}
               </button>
             </form>
 

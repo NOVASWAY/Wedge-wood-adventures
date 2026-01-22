@@ -15,6 +15,8 @@ const BespokeSafaris = () => {
     phone: '',
     luxuryLevel: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -23,9 +25,46 @@ const BespokeSafaris = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+
+    // Create WhatsApp message
+    const message = `*Bespoke Safari Inquiry*\n\n` +
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Travel Dates: ${formData.dates || 'Flexible'}\n` +
+      `Group Size: ${formData.groupSize}\n` +
+      `Luxury Level: ${formData.luxuryLevel}\n` +
+      `Interests: ${formData.interests}`;
+
+    const whatsappUrl = `https://wa.me/254748132915?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+
+    // Simulate form submission delay
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+      
+      // Reset form
+      setFormData({
+        dates: '',
+        groupSize: '',
+        interests: '',
+        name: '',
+        email: '',
+        phone: '',
+        luxuryLevel: '',
+      });
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 5000);
+    }, 1000);
   };
 
   return (
@@ -54,7 +93,7 @@ const BespokeSafaris = () => {
                   type="text"
                   name="dates"
                   placeholder="e.g., July 2026 or flexible"
-                  value={formData.dates}
+                  value={formData.dates || ''}
                   onChange={handleChange}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
                 />
@@ -67,7 +106,7 @@ const BespokeSafaris = () => {
                 </label>
                 <select
                   name="groupSize"
-                  value={formData.groupSize}
+                  value={formData.groupSize || ''}
                   onChange={handleChange}
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
                 >
@@ -86,7 +125,7 @@ const BespokeSafaris = () => {
                 </label>
                 <select
                   name="luxuryLevel"
-                  value={formData.luxuryLevel}
+                  value={formData.luxuryLevel || ''}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
                 >
@@ -106,7 +145,7 @@ const BespokeSafaris = () => {
               <textarea
                 name="interests"
                 placeholder="Wildlife photography, cultural immersion, adventure sports, relaxation, etc..."
-                value={formData.interests}
+                value={formData.interests || ''}
                 onChange={handleChange}
                 rows={4}
                 className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition resize-none"
@@ -121,7 +160,7 @@ const BespokeSafaris = () => {
                   type="text"
                   name="name"
                   placeholder="Your name"
-                  value={formData.name}
+                  value={formData.name || ''}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
                 />
@@ -133,7 +172,7 @@ const BespokeSafaris = () => {
                   type="email"
                   name="email"
                   placeholder="your@email.com"
-                  value={formData.email}
+                  value={formData.email || ''}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
                 />
@@ -146,7 +185,7 @@ const BespokeSafaris = () => {
                 type="tel"
                 name="phone"
                 placeholder="+1 (555) 000-0000"
-                value={formData.phone}
+                value={formData.phone || ''}
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
               />
@@ -154,13 +193,21 @@ const BespokeSafaris = () => {
 
             <button
               type="submit"
-              className="w-full py-3 sm:py-4 bg-primary text-primary-foreground text-sm sm:text-base font-semibold rounded-lg hover:bg-primary/90 transition-all duration-300 flex items-center justify-center hover:shadow-xl hover:scale-105"
+              disabled={isSubmitting}
+              className="w-full py-3 sm:py-4 bg-primary text-primary-foreground text-sm sm:text-base font-semibold rounded-lg hover:bg-primary/90 transition-all duration-300 flex items-center justify-center hover:shadow-xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
-              Get Your Personalized Proposal
-              <ChevronRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />
+              {isSubmitting ? 'Submitting...' : 'Get Your Personalized Proposal'}
+              {!isSubmitting && <ChevronRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5" />}
             </button>
 
           </form>
+          {submitSuccess && (
+            <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+              <p className="text-sm text-green-800 dark:text-green-200 text-center">
+                ✓ Thank you! Your inquiry has been sent. We'll contact you within 24 hours.
+              </p>
+            </div>
+          )}
           <p className="text-center text-xs sm:text-sm text-foreground/60 mt-4 sm:mt-6">
             Our concierge will review your preferences and contact you within 24 hours with bespoke options.
           </p>

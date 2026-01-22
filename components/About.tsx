@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
-import { getImagePath } from '@/lib/utils';
+import { getImagePath, scrollToSection } from '@/lib/utils';
 
 const About = () => {
   return (
@@ -53,7 +53,10 @@ const About = () => {
               ))}
             </div>
 
-            <button className="mt-10 sm:mt-12 inline-flex items-center px-6 py-3 sm:py-4 text-sm sm:text-base bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors">
+            <button 
+              onClick={() => scrollToSection('#contact')}
+              className="mt-10 sm:mt-12 inline-flex items-center px-6 py-3 sm:py-4 text-sm sm:text-base bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors"
+            >
               Learn Our Story
             </button>
           </div>

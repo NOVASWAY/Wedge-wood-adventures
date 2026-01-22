@@ -2,7 +2,7 @@
 
 import { ChevronRight, Compass, Mountain, Users, TreePine } from 'lucide-react';
 import Image from 'next/image';
-import { getImagePath } from '@/lib/utils';
+import { getImagePath, scrollToSection } from '@/lib/utils';
 
 const Experiences = () => {
   const experiences = [
@@ -81,7 +81,10 @@ const Experiences = () => {
                     {exp.description}
                   </p>
 
-                  <button className="inline-flex items-center text-accent hover:text-primary font-semibold transition-colors group/btn">
+                  <button 
+                    onClick={() => scrollToSection('#bespoke')}
+                    className="inline-flex items-center text-accent hover:text-primary font-semibold transition-colors group/btn"
+                  >
                     {exp.cta}
                     <ChevronRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
