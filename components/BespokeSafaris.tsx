@@ -4,6 +4,7 @@ import React from "react"
 
 import { useState } from 'react';
 import { ChevronRight, Calendar, Users, MapPin } from 'lucide-react';
+import { sanitizeInput, validateEmail, validateName, validatePhone, checkRateLimit } from '@/lib/utils';
 
 const BespokeSafaris = () => {
   const [formData, setFormData] = useState({
@@ -17,27 +18,79 @@ const BespokeSafaris = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; interests?: string; rateLimit?: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    // Sanitize input in real-time
+    const sanitized = name === 'interests' ? sanitizeInput(value, 1000) : sanitizeInput(value, 200);
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: sanitized,
     });
+    
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors({ ...errors, [name]: undefined });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check rate limit first
+    const rateLimitCheck = checkRateLimit('bespoke');
+    if (!rateLimitCheck.allowed) {
+      setErrors({
+        rateLimit: `Too many submissions. Please wait ${rateLimitCheck.remainingTime} minute${rateLimitCheck.remainingTime !== 1 ? 's' : ''} before trying again.`
+      });
+      return;
+    }
+    
+    // Validate inputs
+    const newErrors: { name?: string; email?: string; phone?: string; interests?: string; rateLimit?: string } = {};
+    
+    if (!validateName(formData.name)) {
+      newErrors.name = 'Please enter a valid name (2-100 characters)';
+    }
+    
+    if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (formData.phone && !validatePhone(formData.phone)) {
+      newErrors.phone = 'Please enter a valid phone number';
+    }
+    
+    if (formData.interests && formData.interests.length > 1000) {
+      newErrors.interests = 'Interests must be less than 1000 characters';
+    }
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    
     setIsSubmitting(true);
+    setErrors({});
+
+    // Sanitize all inputs before creating message
+    const sanitizedName = sanitizeInput(formData.name, 200);
+    const sanitizedEmail = sanitizeInput(formData.email, 254);
+    const sanitizedPhone = sanitizeInput(formData.phone, 20);
+    const sanitizedDates = sanitizeInput(formData.dates, 200);
+    const sanitizedInterests = sanitizeInput(formData.interests, 1000);
 
     // Create WhatsApp message
     const message = `*Bespoke Safari Inquiry*\n\n` +
-      `Name: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone}\n` +
-      `Travel Dates: ${formData.dates || 'Flexible'}\n` +
-      `Group Size: ${formData.groupSize}\n` +
-      `Luxury Level: ${formData.luxuryLevel}\n` +
-      `Interests: ${formData.interests}`;
+      `Name: ${sanitizedName}\n` +
+      `Email: ${sanitizedEmail}\n` +
+      `Phone: ${sanitizedPhone || 'Not provided'}\n` +
+      `Travel Dates: ${sanitizedDates || 'Flexible'}\n` +
+      `Group Size: ${formData.groupSize || 'Not specified'}\n` +
+      `Luxury Level: ${formData.luxuryLevel || 'Not specified'}\n` +
+      `Interests: ${sanitizedInterests || 'Not specified'}`;
 
     const whatsappUrl = `https://wa.me/254748132915?text=${encodeURIComponent(message)}`;
 
@@ -148,8 +201,17 @@ const BespokeSafaris = () => {
                 value={formData.interests || ''}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition resize-none"
+                maxLength={1000}
+                className={`w-full px-4 py-3 rounded-lg border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 transition resize-none ${
+                  errors.interests ? 'border-red-500 focus:ring-red-500/50' : 'border-border focus:ring-accent/50'
+                }`}
               />
+              {errors.interests && (
+                <p className="text-xs text-red-500 mt-1">{errors.interests}</p>
+              )}
+              <p className="text-xs text-foreground/60 mt-1">
+                {formData.interests.length}/1000 characters
+              </p>
             </div>
 
             {/* Contact Info */}
@@ -162,8 +224,14 @@ const BespokeSafaris = () => {
                   placeholder="Your name"
                   value={formData.name || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
+                  maxLength={200}
+                  className={`w-full px-4 py-3 rounded-lg border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 transition ${
+                    errors.name ? 'border-red-500 focus:ring-red-500/50' : 'border-border focus:ring-accent/50'
+                  }`}
                 />
+                {errors.name && (
+                  <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -174,8 +242,14 @@ const BespokeSafaris = () => {
                   placeholder="your@email.com"
                   value={formData.email || ''}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
+                  maxLength={254}
+                  className={`w-full px-4 py-3 rounded-lg border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 transition ${
+                    errors.email ? 'border-red-500 focus:ring-red-500/50' : 'border-border focus:ring-accent/50'
+                  }`}
                 />
+                {errors.email && (
+                  <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                )}
               </div>
             </div>
 
@@ -187,8 +261,14 @@ const BespokeSafaris = () => {
                 placeholder="+1 (555) 000-0000"
                 value={formData.phone || ''}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
+                maxLength={20}
+                className={`w-full px-4 py-3 rounded-lg border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 transition ${
+                  errors.phone ? 'border-red-500 focus:ring-red-500/50' : 'border-border focus:ring-accent/50'
+                }`}
               />
+              {errors.phone && (
+                <p className="text-xs text-red-500 mt-1">{errors.phone}</p>
+              )}
             </div>
 
             <button
@@ -201,6 +281,13 @@ const BespokeSafaris = () => {
             </button>
 
           </form>
+          {errors.rateLimit && (
+            <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+              <p className="text-sm text-red-800 dark:text-red-200 text-center">
+                ⚠ {errors.rateLimit}
+              </p>
+            </div>
+          )}
           {submitSuccess && (
             <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
               <p className="text-sm text-green-800 dark:text-green-200 text-center">

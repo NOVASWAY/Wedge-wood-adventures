@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { MessageCircle, Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
+import { sanitizeInput, validateEmail, validateName, checkRateLimit } from '@/lib/utils';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,23 +12,71 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string; rateLimit?: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    // Sanitize input in real-time
+    const sanitized = name === 'message' ? sanitizeInput(value, 2000) : sanitizeInput(value, 200);
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: sanitized,
     });
+    
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors({ ...errors, [name]: undefined });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check rate limit first
+    const rateLimitCheck = checkRateLimit('contact');
+    if (!rateLimitCheck.allowed) {
+      setErrors({
+        rateLimit: `Too many submissions. Please wait ${rateLimitCheck.remainingTime} minute${rateLimitCheck.remainingTime !== 1 ? 's' : ''} before trying again.`
+      });
+      return;
+    }
+    
+    // Validate inputs
+    const newErrors: { name?: string; email?: string; message?: string; rateLimit?: string } = {};
+    
+    if (!validateName(formData.name)) {
+      newErrors.name = 'Please enter a valid name (2-100 characters)';
+    }
+    
+    if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.message || formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    } else if (formData.message.length > 2000) {
+      newErrors.message = 'Message is too long (max 2000 characters)';
+    }
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    
     setIsSubmitting(true);
+    setErrors({});
+
+    // Sanitize all inputs before creating message
+    const sanitizedName = sanitizeInput(formData.name, 200);
+    const sanitizedEmail = sanitizeInput(formData.email, 254);
+    const sanitizedMessage = sanitizeInput(formData.message, 2000);
 
     // Create WhatsApp message
     const message = `*Quick Inquiry*\n\n` +
-      `Name: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `Message: ${formData.message}`;
+      `Name: ${sanitizedName}\n` +
+      `Email: ${sanitizedEmail}\n` +
+      `Message: ${sanitizedMessage}`;
 
     const whatsappUrl = `https://wa.me/254748132915?text=${encodeURIComponent(message)}`;
 
@@ -157,9 +206,15 @@ const Contact = () => {
                   value={formData.name || ''}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  maxLength={200}
+                  className={`w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 transition ${
+                    errors.name ? 'border-red-500 focus:ring-red-500/50' : 'border-border focus:ring-accent/50'
+                  }`}
                   placeholder="Your name"
                 />
+                {errors.name && (
+                  <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div>
@@ -172,9 +227,15 @@ const Contact = () => {
                   value={formData.email || ''}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  maxLength={254}
+                  className={`w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 transition ${
+                    errors.email ? 'border-red-500 focus:ring-red-500/50' : 'border-border focus:ring-accent/50'
+                  }`}
                   placeholder="your@email.com"
                 />
+                {errors.email && (
+                  <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div>
@@ -187,10 +248,27 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border border-border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 focus:ring-accent/50 resize-none"
+                  maxLength={2000}
+                  className={`w-full px-4 py-2.5 sm:py-3 text-sm rounded-lg border bg-background text-foreground placeholder-foreground/40 focus:outline-none focus:ring-2 resize-none transition ${
+                    errors.message ? 'border-red-500 focus:ring-red-500/50' : 'border-border focus:ring-accent/50'
+                  }`}
                   placeholder="Tell us about your safari dreams..."
                 />
+                {errors.message && (
+                  <p className="text-xs text-red-500 mt-1">{errors.message}</p>
+                )}
+                <p className="text-xs text-foreground/60 mt-1">
+                  {formData.message.length}/2000 characters
+                </p>
               </div>
+
+              {errors.rateLimit && (
+                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <p className="text-sm text-red-800 dark:text-red-200 text-center">
+                    ⚠ {errors.rateLimit}
+                  </p>
+                </div>
+              )}
 
               {submitSuccess && (
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
