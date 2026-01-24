@@ -135,6 +135,27 @@ export default function RootLayout({
         {children}
         <Analytics />
         
+        {/* Service Worker Registration */}
+        <Script
+          id="sw-register"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/Wedge-wood-adventures/sw.js', {
+                    scope: '/Wedge-wood-adventures/'
+                  }).then(function(registration) {
+                    console.log('Service Worker registered successfully:', registration);
+                  }).catch(function(error) {
+                    console.warn('Service Worker registration failed:', error);
+                  });
+                });
+              }
+            `,
+          }}
+        />
+        
         {/* Chatbase Chatbot Widget */}
         <Script
           id="chatbase-init"
