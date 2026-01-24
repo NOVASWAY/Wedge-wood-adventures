@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# chatbot system prompt (contains training instructions)
+lib/chatbot-system-prompt.ts
