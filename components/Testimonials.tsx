@@ -25,45 +25,39 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32 md:py-40 bg-background">
+    <section id="testimonials" className="py-24 sm:py-32 lg:py-40 bg-background">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14 sm:mb-18 md:mb-20">
+        <div className="text-center mb-16 lg:mb-20">
           <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Voices</span>
-          <h2 className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground">
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-foreground">
             Guest Testimonials
           </h2>
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
             Hear from travelers who have experienced the Wedgewood difference.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7 sm:gap-8 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
-              className="bg-card border border-border rounded-xl p-6 sm:p-8 hover:border-accent/50 hover:shadow-xl transition-all duration-300"
+              className="bg-card border border-border rounded-xl p-6 lg:p-8 hover:border-accent/50 hover:shadow-xl transition-all duration-300"
             >
-              {/* Star rating */}
-              <div className="flex gap-1.5 mb-5 sm:mb-6">
+              <div className="flex gap-1 mb-5">
                 {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-5 w-5 fill-accent text-accent"
-                  />
+                  <Star key={i} className="h-4 w-4 fill-accent text-accent" />
                 ))}
               </div>
 
-              {/* Testimonial text */}
-              <blockquote className="text-sm sm:text-base text-foreground/80 leading-relaxed mb-6 sm:mb-8 italic">
-                "{testimonial.text}"
+              <blockquote className="text-sm sm:text-base text-foreground/80 leading-relaxed mb-6 italic">
+                &ldquo;{testimonial.text}&rdquo;
               </blockquote>
 
-              {/* Author info */}
-              <div className="border-t border-border pt-5 sm:pt-6">
-                <p className="font-semibold text-foreground">
+              <div className="border-t border-border pt-5">
+                <p className="font-semibold text-foreground text-sm">
                   {testimonial.author}
                 </p>
-                <p className="text-xs sm:text-sm text-foreground/60">
+                <p className="text-xs text-foreground/50">
                   {testimonial.location}
                 </p>
               </div>
@@ -71,23 +65,22 @@ const Testimonials = () => {
           ))}
         </div>
 
-        {/* Trust Badge */}
-        <div className="mt-16 sm:mt-24 md:mt-28 bg-gradient-to-r from-accent/5 via-primary/5 to-accent/5 border border-border rounded-xl p-8 sm:p-10 md:p-12 text-center">
-          <p className="text-xs sm:text-sm text-foreground/70 mb-8 sm:mb-10">
+        <div className="mt-20 lg:mt-28 bg-gradient-to-r from-accent/5 via-primary/5 to-accent/5 border border-border rounded-xl p-8 lg:p-12 text-center">
+          <p className="text-sm text-foreground/60 mb-8">
             Join discerning travelers who trust Wedgewood Adventures for their most precious journeys.
           </p>
-          <div className="grid grid-cols-3 gap-4 text-xs sm:text-sm text-foreground/60">
+          <div className="grid grid-cols-3 gap-4">
             <div>
-              <span className="font-semibold text-foreground text-lg sm:text-2xl block">500+</span>
-              <span>Happy Guests</span>
+              <span className="font-bold text-foreground text-2xl lg:text-3xl block">500+</span>
+              <span className="text-xs text-foreground/50">Happy Guests</span>
             </div>
             <div>
-              <span className="font-semibold text-foreground text-lg sm:text-2xl block">50+</span>
-              <span>Destinations</span>
+              <span className="font-bold text-foreground text-2xl lg:text-3xl block">50+</span>
+              <span className="text-xs text-foreground/50">Destinations</span>
             </div>
             <div>
-              <span className="font-semibold text-foreground text-lg sm:text-2xl block">100%</span>
-              <span>Satisfaction</span>
+              <span className="font-bold text-foreground text-2xl lg:text-3xl block">100%</span>
+              <span className="text-xs text-foreground/50">Satisfaction</span>
             </div>
           </div>
         </div>

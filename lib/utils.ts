@@ -28,16 +28,19 @@ export function getImagePath(path: string): string {
   return `${basePath}/${path}`;
 }
 
-// Security: Sanitize user input to prevent XSS and injection attacks
+// Security: Sanitize user input to prevent injection attacks
+// Used for WhatsApp message construction — strips characters dangerous in message context
 export function sanitizeInput(input: string, maxLength: number = 1000): string {
   if (!input) return '';
   
   // Trim and limit length
   let sanitized = input.trim().slice(0, maxLength);
   
-  // Remove potentially dangerous characters while preserving basic formatting
-  // Allow letters, numbers, spaces, and common punctuation
-  sanitized = sanitized.replace(/[<>]/g, ''); // Remove < and > to prevent HTML injection
+  // Strip angle brackets to prevent any accidental HTML injection if output is ever rendered
+  sanitized = sanitized.replace(/[<>]/g, '');
+  
+  // Strip null bytes
+  sanitized = sanitized.replace(/\0/g, '');
   
   return sanitized;
 }

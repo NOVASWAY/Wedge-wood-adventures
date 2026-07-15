@@ -24,6 +24,7 @@ const Navigation = () => {
     { label: 'Destinations', href: '#destinations' },
     { label: 'Bespoke Safaris', href: '#bespoke' },
     { label: 'Gallery', href: '#gallery' },
+    { label: 'Testimonials', href: '#testimonials' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -35,7 +36,6 @@ const Navigation = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
-          {/* Logo */}
           <div className="flex-shrink-0">
             <Image 
               src={getImagePath("/logo.png")} 
@@ -46,7 +46,6 @@ const Navigation = () => {
             />
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-0.5 lg:space-x-1">
             {navItems.map((item) => (
               <a
@@ -59,18 +58,16 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
           <div className="hidden lg:block">
             <button 
               onClick={() => scrollToSection('#bespoke')}
-              className="inline-flex items-center px-4 lg:px-6 py-2 lg:py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-xs lg:text-sm hover:bg-primary/90 transition-colors duration-200 hover:shadow-lg"
+              className="inline-flex items-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors duration-200 hover:shadow-lg"
             >
               Request a Safari
-              <ChevronRight className="ml-2 h-3 lg:h-4 w-3 lg:w-4" />
+              <ChevronRight className="ml-2 h-4 w-4" />
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-foreground hover:bg-accent/10 transition-colors"
@@ -79,9 +76,8 @@ const Navigation = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden bg-background/95 backdrop-blur-md border-t border-border">
+          <div className="lg:hidden bg-background/98 backdrop-blur-md border-t border-border animate-fade-in-up">
             <div className="px-2 pt-2 pb-4 space-y-1">
               {navItems.map((item) => (
                 <a

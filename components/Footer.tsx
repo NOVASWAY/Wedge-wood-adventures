@@ -9,8 +9,8 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-to-b from-card to-background border-t border-border">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -115,12 +115,12 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col sm:flex-row items-center justify-between">
           <p className="text-sm text-foreground/60 mb-4 sm:mb-0">
-            © {currentYear} Wedgewood Adventure Safaris. All rights reserved.
+            &copy; {currentYear} Wedgewood Adventures Kenya. All rights reserved.
           </p>
 
-          <div className="flex items-center gap-1 text-sm text-foreground/60">
+          <div className="flex items-center gap-1.5 text-sm text-foreground/50">
             Crafted with
-            <Heart className="h-4 w-4 text-accent fill-accent" />
+            <Heart className="h-3.5 w-3.5 text-accent fill-accent" />
             for African exploration
           </div>
         </div>
