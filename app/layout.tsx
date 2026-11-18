@@ -84,14 +84,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: `${basePath}/apple-icon.png`,
-        sizes: '180x180',
+        url: `${basePath}/logo.png`,
         type: 'image/png',
       },
     ],
     apple: [
       {
-        url: `${basePath}/apple-icon.png`,
+        url: `${basePath}/logo.png`,
         sizes: '180x180',
         type: 'image/png',
       },
