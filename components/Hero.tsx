@@ -1,81 +1,80 @@
 'use client';
 
-import { ChevronRight, Eye, Crown, MapPin } from 'lucide-react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { getImagePath, scrollToSection } from '@/lib/utils';
+import { getImagePath } from '@/lib/utils';
+
+const journeyNotes = [
+  'Planned in Nairobi',
+  'Private, expert guiding',
+  'Always at your pace',
+];
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24">
-      <Image 
-        src={getImagePath("/safari-hero.jpg")} 
-        alt="African Safari Landscape"
+    <section id="home" className="relative isolate min-h-screen overflow-hidden bg-[#25271d]">
+      <Image
+        src={getImagePath('/safari-hero.jpg')}
+        alt="Golden evening light over Kenya’s open savannah"
         fill
-        className="object-cover absolute inset-0 z-0"
         priority
+        sizes="100vw"
+        className="object-cover object-center"
       />
-      
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60 z-[1]" />
-      <div className="absolute top-20 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl z-[1]" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl z-[1]" />
+      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-black/75 via-black/35 to-black/5" />
+      <div className="absolute inset-0 -z-0 bg-gradient-to-t from-black/65 via-transparent to-black/25" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-0">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 sm:mb-8 leading-tight text-balance drop-shadow-lg animate-fade-in-up">
-          Venture Beyond the Horizon
-        </h1>
-        
-        <p className="text-base sm:text-lg md:text-xl text-white/90 mb-10 sm:mb-14 max-w-2xl mx-auto leading-relaxed text-pretty drop-shadow-md animate-fade-in-up animation-delay-200">
-          Immerse yourself in Africa&apos;s untamed wilderness. Ultra-premium, bespoke safaris where every moment becomes an unforgettable memory etched in your soul.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-300">
-          <button 
-            onClick={() => scrollToSection('#bespoke')}
-            className="inline-flex items-center justify-center px-8 py-4 bg-accent text-black text-base font-semibold rounded-lg hover:bg-accent/90 transition-all duration-300 hover:shadow-2xl hover:scale-105"
-          >
-            Start Your Adventure
-            <ChevronRight className="ml-3 h-5 w-5" />
-          </button>
-          
-          <button 
-            onClick={() => scrollToSection('#experiences')}
-            className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/50 text-white hover:border-white hover:bg-white/10 rounded-lg transition-all duration-300 font-semibold"
-          >
-            Explore Experiences
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-20 sm:mt-24 animate-fade-in-up animation-delay-500">
-          {[
-            { icon: Eye, title: 'Expert Guides', desc: 'Naturalists with decades of safari expertise' },
-            { icon: MapPin, title: 'Exclusive Access', desc: 'Private reserves and intimate wildlife moments' },
-            { icon: Crown, title: 'Complete Luxury', desc: 'First-class camps and personalized service' },
-          ].map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div 
-                key={idx} 
-                className="group space-y-4 bg-black/30 backdrop-blur-sm rounded-lg p-6 hover:bg-black/40 transition-all duration-300 hover:scale-105"
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1440px] flex-col justify-end px-5 pb-8 pt-32 sm:px-8 sm:pb-10 lg:px-14 lg:pb-12">
+        <div className="flex w-full items-end justify-between gap-10">
+          <div className="max-w-4xl">
+            <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80 sm:text-xs">
+              <span className="h-px w-9 bg-accent" />
+              Wedgewood Adventures · Nairobi, Kenya
+            </p>
+            <h1 className="max-w-4xl font-serif text-5xl font-medium leading-[0.98] tracking-[-0.035em] text-white text-balance sm:text-6xl md:text-7xl lg:text-[88px]">
+              Kenya, at your own pace.
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-white/85 sm:text-lg sm:leading-8">
+              Private safari journeys shaped around the way you want to travel—from first light on the Mara to evenings beneath an open sky.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a
+                href="#bespoke"
+                className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-accent px-6 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
               >
-                <div className="relative">
-                  <div 
-                    className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent/60 mx-auto flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                    style={{ animation: `pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite ${idx * 0.3}s` }}
-                  >
-                    <Icon className="w-7 h-7 text-black group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                </div>
-                <h3 className="font-semibold text-white text-base">{item.title}</h3>
-                <p className="text-sm text-white/80 leading-relaxed">{item.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+                Shape your safari
+                <ArrowRight aria-hidden="true" className="size-4" />
+              </a>
+              <a
+                href="#destinations"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/45 px-6 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                Explore Kenya
+              </a>
+            </div>
+          </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <div className="w-7 h-11 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-          <div className="w-1.5 h-2 bg-white/50 rounded-full" />
+          <p className="mb-2 hidden max-w-48 text-right font-serif text-xl italic leading-snug text-white/85 xl:block">
+            The best moments are never on a schedule.
+          </p>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/30 pt-5 sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
+          <ul className="flex flex-wrap gap-x-7 gap-y-2 text-[11px] font-medium uppercase tracking-[0.16em] text-white/80 sm:text-xs">
+            {journeyNotes.map((note) => (
+              <li key={note} className="flex items-center gap-2.5">
+                <span aria-hidden="true" className="size-1 rounded-full bg-accent" />
+                {note}
+              </li>
+            ))}
+          </ul>
+          <a
+            href="#about"
+            className="hidden items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-white/70 transition-colors hover:text-white sm:inline-flex"
+          >
+            Discover Wedgewood
+            <ArrowDown aria-hidden="true" className="size-3.5" />
+          </a>
         </div>
       </div>
     </section>

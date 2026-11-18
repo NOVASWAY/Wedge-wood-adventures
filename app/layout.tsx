@@ -1,5 +1,5 @@
 import React from "react"
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
@@ -8,12 +8,16 @@ import './globals.css'
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  themeColor: '#f7f4ef',
+}
+
 export const metadata: Metadata = {
   title: {
     default: 'Wedgewood Adventures Kenya - Luxury Safari Experiences',
     template: '%s | Wedgewood Adventures Kenya',
   },
-  description: 'Experience ultra-premium, bespoke African safari experiences in Kenya. Private guided safaris, luxury lodges, and authentic cultural immersion. Venture beyond the horizon with Wedgewood Adventures Kenya.',
+  description: 'Plan a private Kenya safari shaped around your interests, with expert guiding, thoughtfully chosen stays, and the freedom to travel at your own pace.',
   keywords: [
     'Kenya safari',
     'luxury safari',
@@ -90,6 +94,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
@@ -123,7 +128,6 @@ export default function RootLayout({
         <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
         <meta httpEquiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Structured Data */}
         <script
@@ -143,8 +147,9 @@ export default function RootLayout({
             __html: `
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/Wedge-wood-adventures/sw.js', {
-                    scope: '/Wedge-wood-adventures/'
+                  const basePath = '${basePath}';
+                  navigator.serviceWorker.register(basePath + '/sw.js', {
+                    scope: basePath + '/'
                   }).then(function(registration) {
                     console.log('Service Worker registered successfully:', registration);
                   }).catch(function(error) {

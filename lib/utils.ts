@@ -13,19 +13,16 @@ export function scrollToSection(sectionId: string) {
   }
 }
 
-// Get image path with basePath for GitHub Pages
+// Prefix public assets only when the static deployment is hosted beneath a path.
 export function getImagePath(path: string): string {
-  const basePath = '/Wedge-wood-adventures';
-  // If path already starts with basePath, return as is
-  if (path.startsWith(basePath)) {
-    return path;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+
+  if (!basePath || normalizedPath.startsWith(`${basePath}/`)) {
+    return normalizedPath;
   }
-  // If path starts with /, add basePath prefix
-  if (path.startsWith('/')) {
-    return `${basePath}${path}`;
-  }
-  // For relative paths, add basePath
-  return `${basePath}/${path}`;
+
+  return `${basePath}${normalizedPath}`;
 }
 
 // Security: Sanitize user input to prevent injection attacks

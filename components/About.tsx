@@ -1,63 +1,74 @@
 'use client';
 
 import Image from 'next/image';
-import { CheckCircle2 } from 'lucide-react';
-import { getImagePath, scrollToSection } from '@/lib/utils';
+import { ArrowRight, Check } from 'lucide-react';
+import { getImagePath } from '@/lib/utils';
+
+const journeyPromises = [
+  'Designed around your interests',
+  'Private guiding, at your pace',
+  'Kenya’s iconic parks and quieter corners',
+  'Thoughtfully chosen stays in the wild',
+];
 
 const About = () => {
   return (
-    <section id="about" className="py-24 sm:py-32 lg:py-40 bg-card">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="relative h-80 sm:h-[480px] rounded-xl overflow-hidden shadow-2xl">
+    <section id="about" className="bg-card py-20 sm:py-28 lg:py-36">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20 lg:px-14">
+        <div className="relative mx-auto w-full max-w-xl lg:mx-0">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-t-[48%] rounded-b-[3px] bg-muted">
             <Image
-              src={getImagePath("/elephants.jpg")}
-              alt="African Elephants - Wedgewood Adventures Kenya"
+              src={getImagePath('/elephants.jpg')}
+              alt="A family of elephants moving together through the Kenyan savannah"
               fill
+              sizes="(max-width: 1024px) 90vw, 44vw"
               className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
           </div>
-
-          <div className="space-y-6">
-            <div>
-              <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">About Us</span>
-              <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-foreground leading-tight">
-                Crafted for Discerning Explorers
-              </h2>
-            </div>
-
-            <p className="text-base sm:text-lg text-foreground/70 leading-relaxed">
-              Wedgewood Adventures Kenya offers unparalleled access to Africa&apos;s most pristine wilderness. Our expert guides bring decades of naturalist experience, tracking wildlife with precision and sharing deep knowledge of Kenya&apos;s ecosystems. Every safari is crafted for your unique desires.
+          <div className="absolute -bottom-5 right-0 max-w-[17rem] border border-border/70 bg-background/95 p-5 shadow-lg backdrop-blur-sm sm:right-5 sm:p-6">
+            <p className="font-serif text-xl leading-snug text-foreground sm:text-2xl">
+              A little less itinerary. A lot more feeling.
             </p>
-
-            <p className="text-sm sm:text-base text-foreground/60 leading-relaxed">
-              From the thundering herds of the Great Migration to intimate encounters with the Big Five, from Maasai cultural immersion to mountain adventures—we transform extraordinary landscapes into unforgettable personal journeys.
+            <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              The Wedgewood way
             </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
-              {[
-                'Expert naturalist guides',
-                'Exclusive private reserves',
-                'Luxury wilderness camps',
-                'Personalized concierge',
-                'Wildlife photography',
-                'Cultural immersion',
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center space-x-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0" />
-                  <span className="text-sm text-foreground/80">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <button 
-              onClick={() => scrollToSection('#contact')}
-              className="mt-6 inline-flex items-center px-6 py-3.5 text-sm bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-            >
-              Learn Our Story
-            </button>
           </div>
+        </div>
+
+        <div className="pt-4 lg:pl-4">
+          <p className="mb-5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-primary sm:text-xs">
+            <span aria-hidden="true" className="h-px w-8 bg-accent" />
+            A Kenyan point of view
+          </p>
+          <h2 className="max-w-xl font-serif text-4xl font-medium leading-[1.08] tracking-[-0.025em] text-foreground text-balance sm:text-5xl lg:text-[58px]">
+            The wild is the reason. You are the story.
+          </h2>
+          <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+            Kenya is more than a destination. It&apos;s the pause before sunrise, the tracks in the dust, and the freedom to stay a little longer when the moment is right. We build private journeys around the things you want to feel, see, and remember.
+          </p>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+            Planned from Nairobi and shaped with expert guides, each safari brings together the right places, people, and pace for you—from the wide-open Mara to the foothills of Kilimanjaro.
+          </p>
+
+          <ul className="mt-8 grid gap-x-7 gap-y-4 sm:grid-cols-2">
+            {journeyPromises.map((promise) => (
+              <li key={promise} className="flex items-start gap-3 text-sm leading-6 text-foreground/85">
+                <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Check aria-hidden="true" className="size-3" />
+                </span>
+                {promise}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            className="mt-9 inline-flex min-h-12 items-center gap-3 border-b border-primary pb-1 text-sm font-semibold text-primary transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            Get to know us
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </a>
         </div>
       </div>
     </section>
