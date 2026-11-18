@@ -137,11 +137,12 @@ const BespokeSafaris = () => {
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="flex items-center text-sm font-semibold text-foreground">
+                <label htmlFor="travel-dates" className="flex items-center text-sm font-semibold text-foreground">
                   <Calendar className="h-4 w-4 mr-2 text-accent" />
                   Travel Dates
                 </label>
                 <input
+                  id="travel-dates"
                   type="text"
                   name="dates"
                   placeholder="e.g., July 2026 or flexible"
@@ -152,11 +153,12 @@ const BespokeSafaris = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="flex items-center text-sm font-semibold text-foreground">
+                <label htmlFor="group-size" className="flex items-center text-sm font-semibold text-foreground">
                   <Users className="h-4 w-4 mr-2 text-accent" />
                   Group Size
                 </label>
                 <select
+                  id="group-size"
                   name="groupSize"
                   value={formData.groupSize || ''}
                   onChange={handleChange}
@@ -171,11 +173,12 @@ const BespokeSafaris = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="flex items-center text-sm font-semibold text-foreground">
+                <label htmlFor="luxury-level" className="flex items-center text-sm font-semibold text-foreground">
                   <MapPin className="h-4 w-4 mr-2 text-accent" />
                   Luxury Level
                 </label>
                 <select
+                  id="luxury-level"
                   name="luxuryLevel"
                   value={formData.luxuryLevel || ''}
                   onChange={handleChange}
@@ -190,10 +193,11 @@ const BespokeSafaris = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground block">
+              <label htmlFor="interests" className="text-sm font-semibold text-foreground block">
                 What interests you most?
               </label>
               <textarea
+                id="interests"
                 name="interests"
                 placeholder="Wildlife photography, cultural immersion, adventure sports, relaxation, etc..."
                 value={formData.interests || ''}
@@ -214,8 +218,9 @@ const BespokeSafaris = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground block">Full Name</label>
+                <label htmlFor="traveler-name" className="text-sm font-semibold text-foreground block">Full Name</label>
                 <input
+                  id="traveler-name"
                   type="text"
                   name="name"
                   placeholder="Your name"
@@ -232,8 +237,9 @@ const BespokeSafaris = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-foreground block">Email</label>
+                <label htmlFor="traveler-email" className="text-sm font-semibold text-foreground block">Email</label>
                 <input
+                  id="traveler-email"
                   type="email"
                   name="email"
                   placeholder="your@email.com"
@@ -251,8 +257,9 @@ const BespokeSafaris = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground block">Phone</label>
+                <label htmlFor="traveler-phone" className="text-sm font-semibold text-foreground block">Phone</label>
               <input
+                id="traveler-phone"
                 type="tel"
                 name="phone"
                 placeholder="+1 (555) 000-0000"

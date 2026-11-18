@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, Moon, Sun, X } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { getImagePath } from '@/lib/utils';
 
 const navItems = [
@@ -11,6 +12,27 @@ const navItems = [
   { label: 'Destinations', href: '#destinations' },
   { label: 'Moments', href: '#gallery' },
 ];
+
+const ThemeToggle = ({ isScrolled }: { isScrolled: boolean }) => {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const isDark = resolvedTheme === 'dark';
+
+  useEffect(() => setMounted(true), []);
+
+  return (
+    <button
+      type="button"
+      aria-label={mounted ? (isDark ? 'Switch to light mode' : 'Switch to dark mode') : 'Toggle color theme'}
+      aria-pressed={mounted ? isDark : undefined}
+      title={mounted ? (isDark ? 'Switch to light mode' : 'Switch to dark mode') : 'Toggle color theme'}
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${isScrolled ? 'border-border text-foreground hover:bg-muted' : 'border-white/40 text-white hover:bg-white/10'}`}
+    >
+      {mounted && isDark ? <Sun aria-hidden="true" className="size-4" /> : <Moon aria-hidden="true" className="size-4" />}
+    </button>
+  );
+};
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,6 +82,7 @@ const Navigation = () => {
               {item.label}
             </a>
           ))}
+          <ThemeToggle isScrolled={isScrolled} />
           <a
             href="#bespoke"
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-accent px-5 text-xs font-semibold text-accent-foreground transition-colors hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
@@ -69,16 +92,19 @@ const Navigation = () => {
           </a>
         </div>
 
-        <button
-          type="button"
-          aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={isOpen}
-          aria-controls="mobile-navigation"
-          onClick={() => setIsOpen((open) => !open)}
-          className={`inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden ${isScrolled ? 'text-foreground' : 'text-white'}`}
-        >
-          {isOpen ? <X aria-hidden="true" className="size-5" /> : <Menu aria-hidden="true" className="size-5" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle isScrolled={isScrolled} />
+          <button
+            type="button"
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsOpen((open) => !open)}
+            className={`inline-flex size-11 items-center justify-center rounded-full transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${isScrolled ? 'text-foreground' : 'text-white'}`}
+          >
+            {isOpen ? <X aria-hidden="true" className="size-5" /> : <Menu aria-hidden="true" className="size-5" />}
+          </button>
+        </div>
       </nav>
 
       <div

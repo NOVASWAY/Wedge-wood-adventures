@@ -62,7 +62,7 @@ const Experiences = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute top-4 right-4 w-11 h-11 bg-accent rounded-full flex items-center justify-center shadow-lg">
-                    <Icon className="h-5 w-5 text-black" />
+                    <Icon className="h-5 w-5 text-accent-foreground" />
                   </div>
                 </div>
 

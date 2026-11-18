@@ -67,30 +67,39 @@ const Gallery = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           {gallery.map((item, idx) => (
-            <div
+            <button
               key={item.id}
+              type="button"
+              aria-label={`View ${item.title}`}
               onClick={() => setSelectedIdx(idx)}
-              className={`group relative overflow-hidden rounded-xl cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 ${
+              className={`group relative w-full overflow-hidden rounded-xl text-left shadow-lg transition-all duration-300 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${
                 idx === 0 || idx === 6 ? 'md:col-span-2 md:row-span-2 h-64 sm:h-80' : 'h-40 sm:h-48'
               }`}
             >
-              <Image 
-                src={item.image || getImagePath("/placeholder.svg")}
+              <Image
+                src={item.image || getImagePath('/placeholder.svg')}
                 alt={item.title}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                <h3 className="text-white font-semibold text-sm sm:text-base">{item.title}</h3>
-                <p className="text-white/60 text-xs uppercase tracking-wider">{item.category}</p>
-              </div>
-            </div>
+              <span className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span className="text-sm font-semibold text-white sm:text-base">{item.title}</span>
+                <span className="text-xs uppercase tracking-wider text-white/75">{item.category}</span>
+              </span>
+            </button>
           ))}
         </div>
 
         {selectedIdx !== null && (
-          <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="gallery-image-title"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+          >
             <button
+              type="button"
+              aria-label="Close image viewer"
               onClick={() => setSelectedIdx(null)}
               className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-2 z-10"
             >
@@ -98,8 +107,10 @@ const Gallery = () => {
             </button>
 
             <button
+              type="button"
+              aria-label="Previous image"
               onClick={prevImage}
-              className="absolute left-2 sm:left-4 text-white/70 hover:text-white transition-colors p-2 z-10"
+              className="absolute left-2 z-10 p-2 text-white/70 transition-colors hover:text-white sm:left-4"
             >
               <ChevronLeft className="h-8 w-8" />
             </button>
@@ -115,7 +126,7 @@ const Gallery = () => {
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-white text-xl font-semibold">{gallery[selectedIdx].title}</h3>
+                <h3 id="gallery-image-title" className="text-xl font-semibold text-white">{gallery[selectedIdx].title}</h3>
                 <p className="text-white/50 text-xs uppercase tracking-wider">{gallery[selectedIdx].category}</p>
                 {gallery[selectedIdx].description && (
                   <p className="text-white/70 text-sm mt-2">{gallery[selectedIdx].description}</p>
@@ -128,8 +139,10 @@ const Gallery = () => {
             </div>
 
             <button
+              type="button"
+              aria-label="Next image"
               onClick={nextImage}
-              className="absolute right-2 sm:right-4 text-white/70 hover:text-white transition-colors p-2 z-10"
+              className="absolute right-2 z-10 p-2 text-white/70 transition-colors hover:text-white sm:right-4"
             >
               <ChevronRight className="h-8 w-8" />
             </button>
