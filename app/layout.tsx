@@ -8,6 +8,7 @@ import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export const viewport: Viewport = {
   themeColor: '#19231d',
@@ -83,10 +84,18 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/Wedge-wood-adventures/logo.png',
+        url: `${basePath}/apple-icon.png`,
+        sizes: '180x180',
+        type: 'image/png',
       },
     ],
-    apple: '/Wedge-wood-adventures/logo.png',
+    apple: [
+      {
+        url: `${basePath}/apple-icon.png`,
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
   },
 }
 
@@ -95,7 +104,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',

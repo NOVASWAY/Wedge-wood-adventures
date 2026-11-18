@@ -1,153 +1,198 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getImagePath } from '@/lib/utils';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
+const galleryItems = [
+  {
+    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-18%20at%2012.25.18-AC8SAfsEUpYj09a3RfwyR4SAosPvP9.jpeg',
+    width: 1600,
+    height: 576,
+    title: 'A warm Wedgewood welcome',
+    place: 'Leopard Beach · Mombasa',
+    category: 'The journey begins',
+    description: 'A first-day hello beside the safari vehicle, with the coast just beyond the garden.',
+    alt: 'Safari guests meeting the Wedgewood guide beside their vehicle at Leopard Beach Resort',
+  },
+  {
+    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-18%20at%2012.25.19-xYkZBobLuqBMeCT9ZzFcMIwoP0HES5.jpeg',
+    width: 1600,
+    height: 576,
+    title: 'Into the Taita Hills',
+    place: 'Taita Hills Wildlife Sanctuary',
+    category: 'The road ahead',
+    description: 'The last light of day settles over the lodge gates as the wild opens up ahead.',
+    alt: 'Safari vehicle arriving at the illuminated Taita Hills and Salt Lick lodge entrance at dusk',
+  },
+  {
+    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-18%20at%2012.25.21%20%281%29-a6yeB5AmgfTwSqgS5JVbnolSuFnwT4.jpeg',
+    width: 576,
+    height: 1600,
+    title: 'A moment with the herd',
+    place: 'Kenya’s open plains',
+    category: 'Wild encounters',
+    description: 'A quiet roadside pause with a family of elephants moving through the palms.',
+    alt: 'A herd of elephants crossing an open plain beneath a clear blue sky',
+  },
+  {
+    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-18%20at%2012.25.23-Y4fL7O2KT05MhtgijmEY99RvHMdZUF.jpeg',
+    width: 1600,
+    height: 576,
+    title: 'The best journeys are shared',
+    place: 'Nairobi · Kenya',
+    category: 'Good company',
+    description: 'New friends, a little luggage, and the promise of a few unforgettable days ahead.',
+    alt: 'A group of safari travelers gathered with their bags beside the Wedgewood vehicle',
+  },
+  {
+    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-11-18%20at%2012.25.22-WGrXOjpeN9KyybHkYs0YdxsegtLc9C.jpeg',
+    width: 576,
+    height: 1600,
+    title: 'Eye to eye with the wild',
+    place: 'Kenyan savannah',
+    category: 'Wild encounters',
+    description: 'A giraffe pauses in the tall grass, framed by the wide blue of an African sky.',
+    alt: 'A giraffe standing in golden grass against a wide blue sky',
+  },
+];
 
 const Gallery = () => {
-  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeItem = galleryItems[activeIndex];
 
-  const gallery = [
-    { id: 1, image: getImagePath('/elephants.jpg'), title: 'African Elephants', category: 'Wildlife', description: 'Majestic elephant herds roaming the savanna' },
-    { id: 2, image: getImagePath('/lion-pride.jpg'), title: 'Majestic Lion Pride', category: 'Wildlife', description: 'A pride of lions in their natural habitat' },
-    { id: 3, image: getImagePath('/flamingo-lake.jpg'), title: 'Pink Flamingos', category: 'Wildlife', description: 'Thousands of flamingos creating a surreal pink landscape' },
-    { id: 4, image: getImagePath('/game-drive.jpg'), title: 'Game Drive Experience', category: 'Wildlife', description: 'Up close encounters with Kenya\'s magnificent wildlife' },
-    { id: 5, image: getImagePath('/Game-drive.jpeg'), title: 'Safari Game Drive', category: 'Wildlife', description: 'Expert-guided wildlife viewing in the heart of Africa' },
-    { id: 6, image: getImagePath('/Maasai-mara.jpeg'), title: 'Lion Feeding - Masai Mara', category: 'Wildlife', description: 'A lioness feeding in the wild, captured during a game drive' },
-    { id: 7, image: getImagePath('/Amboseli.jpeg'), title: 'Amboseli National Park', category: 'Landscapes', description: 'Elephant herds with Mount Kilimanjaro in the background' },
-    { id: 8, image: getImagePath('/kilimanjaro.jpg'), title: 'Mount Kilimanjaro', category: 'Landscapes', description: 'Africa\'s highest peak bathed in golden morning light' },
-    { id: 9, image: getImagePath('/tsavo.jpg'), title: 'Tsavo National Parks', category: 'Landscapes', description: 'Vast untamed wilderness with red elephants' },
-    { id: 10, image: getImagePath('/safari-hero.jpg'), title: 'African Safari Landscape', category: 'Landscapes', description: 'The breathtaking beauty of Kenya\'s wilderness' },
-    { id: 11, image: getImagePath('/maasai-culture.jpg'), title: 'Maasai Warriors', category: 'Culture', description: 'Authentic cultural immersion with the Maasai people' },
-    { id: 12, image: getImagePath('/safari-camp.jpg'), title: 'Luxury Safari Camp', category: 'Accommodation', description: 'Ultra-premium camps offering comfort in the wild' },
-  ];
-
-  const nextImage = useCallback(() => {
-    if (selectedIdx !== null) {
-      setSelectedIdx((selectedIdx + 1) % gallery.length);
-    }
-  }, [selectedIdx, gallery.length]);
-
-  const prevImage = useCallback(() => {
-    if (selectedIdx !== null) {
-      setSelectedIdx((selectedIdx - 1 + gallery.length) % gallery.length);
-    }
-  }, [selectedIdx, gallery.length]);
-
-  useEffect(() => {
-    if (selectedIdx === null) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') nextImage();
-      else if (e.key === 'ArrowLeft') prevImage();
-      else if (e.key === 'Escape') setSelectedIdx(null);
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
-    };
-  }, [selectedIdx, nextImage, prevImage]);
+  const showImage = (direction: number) => {
+    setActiveIndex((currentIndex) => (currentIndex + direction + galleryItems.length) % galleryItems.length);
+  };
 
   return (
-    <section id="gallery" className="py-24 sm:py-32 lg:py-40 bg-card">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 lg:mb-20">
-          <span className="inline-block text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider">Our World</span>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-foreground">
-            Experience Gallery
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-            A glimpse into the extraordinary moments our guests have experienced across Kenya.
+    <section id="gallery" className="overflow-hidden bg-card py-20 sm:py-28 lg:py-36">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-14">
+        <div className="mb-10 flex flex-col items-start justify-between gap-5 sm:mb-14 sm:flex-row sm:items-end">
+          <div className="max-w-2xl">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-accent sm:text-xs">Our world, in moments</span>
+            <h2 className="mt-3 font-serif text-4xl font-medium leading-tight tracking-[-0.025em] text-foreground sm:text-5xl">
+              Experience Gallery
+            </h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base sm:leading-8">
+              Small moments, unforgettable places, and the people who make every journey their own.
+            </p>
+          </div>
+          <p className="shrink-0 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            Guest stories · Kenya
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-          {gallery.map((item, idx) => (
-            <button
-              key={item.id}
-              type="button"
-              aria-label={`View ${item.title}`}
-              onClick={() => setSelectedIdx(idx)}
-              className={`group relative w-full overflow-hidden rounded-xl text-left shadow-lg transition-all duration-300 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${
-                idx === 0 || idx === 6 ? 'md:col-span-2 md:row-span-2 h-64 sm:h-80' : 'h-40 sm:h-48'
-              }`}
-            >
-              <Image
-                src={item.image || getImagePath('/placeholder.svg')}
-                alt={item.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <span className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <span className="text-sm font-semibold text-white sm:text-base">{item.title}</span>
-                <span className="text-xs uppercase tracking-wider text-white/75">{item.category}</span>
+        <div
+          aria-label="Safari photo carousel"
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowRight') {
+              event.preventDefault();
+              showImage(1);
+            } else if (event.key === 'ArrowLeft') {
+              event.preventDefault();
+              showImage(-1);
+            }
+          }}
+          className="overflow-hidden rounded-[24px] border border-border bg-background shadow-2xl sm:rounded-[30px]"
+        >
+          <div className="grid lg:grid-cols-[minmax(0,1.55fr)_minmax(300px,0.8fr)]">
+            <figure className={`relative flex ${activeItem.height > activeItem.width ? 'h-[clamp(24rem,48vw,34rem)]' : 'h-[clamp(12rem,26vw,22rem)]'} items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_#34402f_0%,_#20291f_52%,_#151a15_100%)] px-5 py-6 sm:px-10 sm:py-8`}>
+              <span className="absolute left-5 top-5 z-10 rounded-full border border-white/20 bg-black/25 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/85 backdrop-blur-sm sm:left-7 sm:top-7 sm:text-[10px]">
+                Field note&nbsp; {String(activeIndex + 1).padStart(2, '0')} / {String(galleryItems.length).padStart(2, '0')}
               </span>
-            </button>
-          ))}
-        </div>
+              <Image
+                key={activeItem.image}
+                src={activeItem.image}
+                alt={activeItem.alt}
+                width={activeItem.width}
+                height={activeItem.height}
+                unoptimized
+                sizes="(max-width: 1024px) 100vw, 62vw"
+                className="relative z-0 max-h-full max-w-full object-contain transition-opacity duration-300"
+              />
+              <figcaption className="sr-only">{activeItem.title}, {activeItem.place}</figcaption>
+            </figure>
 
-        {selectedIdx !== null && (
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="gallery-image-title"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
-          >
-            <button
-              type="button"
-              aria-label="Close image viewer"
-              onClick={() => setSelectedIdx(null)}
-              className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-2 z-10"
-            >
-              <X className="h-6 w-6" />
-            </button>
-
-            <button
-              type="button"
-              aria-label="Previous image"
-              onClick={prevImage}
-              className="absolute left-2 z-10 p-2 text-white/70 transition-colors hover:text-white sm:left-4"
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </button>
-
-            <div className="text-center max-w-3xl w-full">
-              <div className="relative w-full aspect-[4/3] rounded-xl mb-4 overflow-hidden">
-                <Image 
-                  src={gallery[selectedIdx].image || getImagePath("/placeholder.svg")}
-                  alt={gallery[selectedIdx].title}
-                  fill
-                  className="object-contain"
-                />
+            <div className="flex flex-col justify-between gap-8 p-5 sm:p-8 lg:p-9">
+              <div aria-live="polite" aria-atomic="true">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent sm:text-[11px]">
+                  {activeItem.category}
+                </p>
+                <h3 className="mt-4 max-w-sm font-serif text-3xl font-medium leading-tight text-foreground sm:text-4xl">
+                  {activeItem.title}
+                </h3>
+                <p className="mt-3 text-sm font-medium text-foreground/80">{activeItem.place}</p>
+                <p className="mt-5 max-w-md text-sm leading-7 text-muted-foreground sm:text-base">
+                  {activeItem.description}
+                </p>
               </div>
 
-              <div className="space-y-1">
-                <h3 id="gallery-image-title" className="text-xl font-semibold text-white">{gallery[selectedIdx].title}</h3>
-                <p className="text-white/50 text-xs uppercase tracking-wider">{gallery[selectedIdx].category}</p>
-                {gallery[selectedIdx].description && (
-                  <p className="text-white/70 text-sm mt-2">{gallery[selectedIdx].description}</p>
-                )}
-              </div>
-
-              <div className="mt-4 text-white/40 text-sm">
-                {selectedIdx + 1} / {gallery.length}
+              <div>
+                <div className="mb-5 flex items-center justify-between gap-4">
+                  <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                    {String(activeIndex + 1).padStart(2, '0')} <span className="text-foreground/30">/</span> {String(galleryItems.length).padStart(2, '0')}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      aria-label="Previous photo"
+                      onClick={() => showImage(-1)}
+                      className="inline-flex size-11 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    >
+                      <ArrowLeft aria-hidden="true" className="size-4" />
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Next photo"
+                      onClick={() => showImage(1)}
+                      className="inline-flex size-11 items-center justify-center rounded-full bg-accent text-accent-foreground transition-colors hover:bg-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    >
+                      <ArrowRight aria-hidden="true" className="size-4" />
+                    </button>
+                  </div>
+                </div>
+                <div aria-hidden="true" className="h-px bg-border">
+                  <span
+                    className="block h-full bg-accent transition-[width] duration-300"
+                    style={{ width: `${((activeIndex + 1) / galleryItems.length) * 100}%` }}
+                  />
+                </div>
               </div>
             </div>
-
-            <button
-              type="button"
-              aria-label="Next image"
-              onClick={nextImage}
-              className="absolute right-2 z-10 p-2 text-white/70 transition-colors hover:text-white sm:right-4"
-            >
-              <ChevronRight className="h-8 w-8" />
-            </button>
           </div>
-        )}
+
+          <div className="border-t border-border px-4 py-4 sm:px-7 sm:py-5">
+            <div role="group" aria-label="Choose a safari photo" className="flex gap-3 overflow-x-auto pb-1">
+              {galleryItems.map((item, index) => (
+                <button
+                  key={item.image}
+                  type="button"
+                  aria-label={`Show photo ${index + 1}: ${item.title}`}
+                  aria-pressed={index === activeIndex}
+                  onClick={() => setActiveIndex(index)}
+                  className={`group flex w-[112px] shrink-0 flex-col gap-2 rounded-xl p-1 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-[132px] ${
+                    index === activeIndex ? 'bg-accent/15' : 'hover:bg-muted'
+                  }`}
+                >
+                  <span className="flex h-[62px] w-full items-center justify-center overflow-hidden rounded-lg bg-[#20291f] p-1.5">
+                    <Image
+                      src={item.image}
+                      alt=""
+                      width={item.width}
+                      height={item.height}
+                      unoptimized
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </span>
+                  <span className={`w-full truncate px-1 text-[10px] font-medium ${index === activeIndex ? 'text-accent' : 'text-muted-foreground group-hover:text-foreground'}`}>
+                    {item.title}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
