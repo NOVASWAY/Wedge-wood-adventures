@@ -34,6 +34,30 @@ const Destinations = () => {
       description: 'Thousands of pink flamingos create a surreal landscape. Rhino sanctuary and rare bird species in a unique soda lake ecosystem.',
       highlights: ['Flamingos', 'Rhino Sanctuary', 'Bird Paradise', 'Scenic Beauty'],
     },
+    {
+      image: getImagePath('/tanzania-serengeti.png'),
+      alt: 'Elephants crossing the Serengeti plains at golden hour',
+      name: 'Tanzania',
+      tagline: 'Serengeti & Ngorongoro',
+      description: 'Track the Great Migration across the Serengeti, explore the wildlife-rich Ngorongoro Crater, and unwind in intimate camps beneath vast African skies.',
+      highlights: ['Great Migration', 'Ngorongoro Crater', 'Big Five', 'Tented Camps'],
+    },
+    {
+      image: getImagePath('/rwanda-volcanoes.png'),
+      alt: 'Mountain gorillas in Rwanda’s misty highland forest',
+      name: 'Rwanda',
+      tagline: 'Land of a Thousand Hills',
+      description: 'Trek with expert guides in Volcanoes National Park to see mountain gorillas, then slow down in the Nyungwe rainforest or along Lake Kivu.',
+      highlights: ['Gorilla Treks', 'Volcanoes National Park', 'Nyungwe Forest', 'Lake Kivu'],
+    },
+    {
+      image: getImagePath('/uganda-murchison-falls.png'),
+      alt: 'The Victoria Nile plunging through Murchison Falls in Uganda',
+      name: 'Uganda',
+      tagline: 'Pearl of Africa',
+      description: 'Pair gorilla trekking in Bwindi with game drives in Queen Elizabeth National Park and the thundering Nile at Murchison Falls.',
+      highlights: ['Bwindi Gorillas', 'Murchison Falls', 'Queen Elizabeth Park', 'Nile Safaris'],
+    },
   ];
 
   return (
@@ -53,12 +77,12 @@ const Destinations = () => {
           {destinations.map((dest, idx) => (
             <div
               key={idx}
-              className="group bg-background border border-border rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
+              className={`group bg-background border border-border rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 ${idx === destinations.length - 1 && destinations.length % 2 === 1 ? 'md:col-span-2 md:w-1/2 md:justify-self-center' : ''}`}
             >
               <div className="relative h-56 overflow-hidden">
                 <Image 
                   src={dest.image || getImagePath("/placeholder.svg")}
-                  alt={dest.name}
+                  alt={'alt' in dest && dest.alt ? dest.alt : dest.name}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
